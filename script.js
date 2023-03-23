@@ -1,4 +1,4 @@
-var points = {Brave: 0, Hardy: 0, Docile: 0, Timid: 0, Relaxed: 0, Jolly: 0, Naive: 0, Sassy: 0, Impish: 0, Quirky: 0, Hasty: 0};
+var points = {Brave: 0, Hardy: 0, Docile: 0, Timid: 0, Relaxed: 0, Jolly: 0, Naive: 0, Sassy: 0, Impish: 0, Quirky: 0, Hasty: 0, Calm: 0, Lonely: 0};
 
 var questions = [
 	{
@@ -25,12 +25,78 @@ var questions = [
 			{answer: "Say thanks with a joke", points: {Naive: 1, Lonely: 1}},
 			{answer: "Say thanks, but be cool", points: {Sassy: 2}}
 		]
+	},
+	{
+		question: "A human hand extends out of a toilet! What would you do?",
+		answers: [
+			{answer: "Scream and run", points: {Timid: 2}},
+			{answer: "Close the lid without a word", points: {Hardy: 1, Calm: 2}},
+			{answer: "Shake hands with it", points: {Naive: 1, Brave: 2, Impish: 1}}
+		]
+	},
+	{
+		question: "A test is coming up. How do you study for it?",
+		answers: [
+			{answer: "Study hard", points: {Hardy: 2}},
+			{answer: "At the last second", points: {Relaxed: 2}},
+			{answer: "Ignore it and play", points: {Impish: 2}}
+		]
+	},
+	{
+		question: "Are there many things you would like to do?",
+		answers: [
+			{answer: "Yes", points: {Hardy: 1, Impish: 2}},
+			{answer: "No", points: {Quirky: 2, Sassy: 1}}
+		]
+	},
+	{
+		question: "Are you a cheerful personality?",
+		answers: [
+			{answer: "Yes", points: {Naive: 1, Jolly: 2}},
+			{answer: "No", points: {Quirky: 1, Sassy: 1}}
+		]
+	},
+	{
+		question: "Are you often late for school or meetings?",
+		answers: [
+			{answer: "Yes", points: {Sassy: 1, Relaxed: 2}},
+			{answer: "No", points: {Hardy: 2, Hasty: 1}}
+		]
+	},
+	{
+		question: "Can you focus on something you like?",
+		answers: [
+			{answer: "Yes", points: {Hardy: 2, Docile: 1}},
+			{answer: "No", points: {Quirky: 2}}
+		]
+	},
+	{
+		question: "Can you go into a haunted house?",
+		answers: [
+			{answer: "No problem", points: {Brave: 3}},
+			{answer: "Uh...n-no...", points: {Timid: 2}},
+			{answer: "With someone I like", points: {Sassy: 2}}
+		]
+	},
+	{
+		question: "Can you sincerely thank someone when you are grateful?",
+		answers: [
+			{answer: "Yes", points: {Calm: 1, Docile: 2}},
+			{answer: "No", points: {Quirky: 1, Sassy: 2}}
+		]
+	},
+	{
+		question: "Do others sometimes call you childish?",
+		answers: [
+			{answer: "Yes", points: {Naive: 2, Jolly: 1}},
+			{answer: "No", points: {Calm: 2}}
+		]
 	}
 ];
 
 function generateQuestion()
 {
-	if (questions.length === 0)
+	if (questions.length === 4)
 	{
 		var questionElement = document.getElementById("question");
 		questionElement.style.display = "none";
@@ -101,8 +167,11 @@ function calculateResult()
 	var sassyPoints = points.Sassy;
 	var impishPoints = points.Impish;
 	var quirkyPoints = points.Quirky;
+	var hastyPoints = points.Hasty;
+	var calmPoints = points.Calm;
+	var lonelyPoints = points.Lonely;
 
-	var maxPoints = Math.max(bravePoints, hardyPoints, docilePoints, timidPoints, relaxedPoints, jollyPoints, naivePoints, sassyPoints, impishPoints, quirkyPoints);
+	var maxPoints = Math.max(bravePoints, hardyPoints, docilePoints, timidPoints, relaxedPoints, jollyPoints, naivePoints, sassyPoints, impishPoints, quirkyPoints, hastyPoints, calmPoints, lonelyPoints);
   
 	if (maxPoints === bravePoints)
 	{
@@ -143,5 +212,17 @@ function calculateResult()
 	else if (maxPoints === quirkyPoints)
 	{
 		return "Quirky";
+	}
+	else if (maxPoints === hastyPoints)
+	{
+		return "Hasty";
+	}
+	else if (maxPoints === calmPoints)
+	{
+		return "Calm";
+	}
+	else if (maxPoints === lonelyPoints)
+	{
+		return "Lonely";
 	}
 }
