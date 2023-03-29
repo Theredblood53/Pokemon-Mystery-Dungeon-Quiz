@@ -1,6 +1,6 @@
 var genpoints = {Brave: 0, Hardy: 0, Docile: 0, Timid: 0, Relaxed: 0, Jolly: 0, Naive: 0, Sassy: 0, Impish: 0, Quirky: 0, Hasty: 0, Calm: 0, Lonely: 0};
 
-var questions = [
+var questionsRB = [
 	{
 		question: "A delinquent is hassling a girl on a busy street! What will you do?",
 		answers: [
@@ -91,12 +91,144 @@ var questions = [
 			{answer: "Yes", points: {Naive: 2, Jolly: 1}},
 			{answer: "No", points: {Calm: 2}}
 		]
+	},
+	{
+		question: "Do others tell you to watch what you say?",
+		answers: [
+			{answer: "Yes", points: {Sassy: 2, Impish: 1}},
+			{answer: "No", points: {Calm: 2}}
+		]
+	},
+	{
+		question: "Do you dream of lounging around idly without much excitement?",
+		answers: [
+			{answer: "Yes", points: {Calm: 2}},
+			{answer: "No", points: {Impish: 2}}
+		]
+	},
+	{
+		question: "Do you fall asleep without noticing?",
+		answers: [
+			{answer: "Yes", points: {Calm: 1, Relaxed: 2}},
+			{answer: "No", points: {Hardy: 2}}
+		]
+	},
+	{
+		question: "Do you feel lonesome when you are alone?",
+		answers: [
+			{answer: "Yes", points: {Timid: 1, Lonely: 2}},
+			{answer: "No", points: {Sassy: 2}}
+		]
+	},
+	{
+		question: "Do you get the feeling you've slowed down lately?",
+		answers: [
+			{answer: "Yes", points: {Relaxed: 2}},
+			{answer: "No", points: {Impish: 1, Hasty: 2}}
+		]
+	},
+	{
+		question: "Do you hate to be the last person to leave class at the end of a school day?",
+		answers: [
+			{answer: "Yes", points: {Timid: 1, Lonely: 2}},
+			{answer: "No", points: {Brave: 3, Relaxed: 1}}
+		]
+	},
+	{
+		question: "Do you like groan-inducing puns?",
+		answers: [
+			{answer: "Love them!", points: {Naive: 3, Impish: 1}},
+			{answer: "A little", points: {Jolly: 2}},
+			{answer: "Spare me", points: {Sassy: 2}}
+		]
+	},
+	{
+		question: "Do you get the feeling you've slowed down lately?",
+		answers: [
+			{answer: "Yes", points: {Impish: 2}},
+			{answer: "No", points: {Docile: 1, Relaxed: 1}}
+		]
+	},
+	{
+		question: "Do you like to fight?",
+		answers: [
+			{answer: "Yes", points: {Timid: 2, Impish: 1}},
+			{answer: "No", points: {Calm: 2, Lonely: 1}}
+		]
+	},
+	{
+		question: "Do you like to imagine things for your own amusement?",
+		answers: [
+			{answer: "Yes", points: {Naive: 2}},
+			{answer: "No", points: {Hasty: 2}}
+		]
+	},
+	{
+		question: "Do you like to noisily enjoy yourself with others?",
+		answers: [
+			{answer: "Yes", points: {Lonely: 1, Jolly: 2}},
+			{answer: "No", points: {Timid: 1}}
+		]
+	},
+	{
+		question: "Do you often yawn?",
+		answers: [
+			{answer: "Yes", points: {Calm: 2, Relaxed: 1}},
+			{answer: "No", points: {Hardy: 1, Hasty: 2}}
+		]
+	},
+	{
+		question: "Do you occasionally consider yourself to be dull and over cautious?",
+		answers: [
+			{answer: "Yes", points: {Calm: 2, Lonely: 1}},
+			{answer: "No", points: {Hardy: 2}}
+		]
+	},
+	{
+		question: "Do you sometimes run out of things to do all of a sudden?",
+		answers: [
+			{answer: "Yes", points: {Quirky: 2}},
+			{answer: "No", points: {Hardy: 2}}
+		]
+	},
+	{
+		question: "Do you tend to laugh a lot?",
+		answers: [
+			{answer: "Yes", points: {Docile: 1, Naive: 2}},
+			{answer: "No", points: {Quirky: 2}}
+		]
+	},
+	{
+		question: "Do you think you are cool? Be honest.",
+		answers: [
+			{answer: "Yes", points: {Sassy: 2}},
+			{answer: "No", points: {Relaxed: 2}}
+		]
+	},
+	{
+		question: "Grab any finger on your left hand. Which digit did you grab?",
+		answers: [
+			{answer: "Thumb", points: {Timid: 2}},
+			{answer: "Index finger", points: {Hasty: 2}},
+			{answer: "Middle finger", points: {Jolly: 2}},
+			{answer: "Ring finger", points: {Sassy: 2}},
+			{answer: "Little finger", points: {Lonely: 2}}
+		]
+	},
+	{
+		question: "Have you ever made a pitfall trap?",
+		answers: [
+			{answer: "Yes", points: {Lonely: 1, Impish: 2}},
+			{answer: "No", points: {Calm: 2}}
+		]
 	}
 ];
 
-function generateQuestion()
+var questionsminus8 = questionsRB.length - 8;
+
+function generateQuestionRB()
 {
-	if (questions.length === 4)
+	if (questionsRB.length === questionsminus8)
 	{
 		var questionElement = document.getElementById("question");
 		questionElement.style.display = "none";
@@ -113,8 +245,8 @@ function generateQuestion()
 	var resultElement = document.getElementById("result");
 	resultElement.style.display = "none";
 	
-	var questionIndex = Math.floor(Math.random() * questions.length);
-	var question = questions[questionIndex];
+	var questionIndex = Math.floor(Math.random() * questionsRB.length);
+	var question = questionsRB[questionIndex];
 
 	var questionElement = document.getElementById("question");
 	questionElement.innerHTML = question.question;
@@ -142,9 +274,9 @@ function generateQuestion()
 					}
 				}
 
-				questions.splice(questionIndex, 1);
+				questionsRB.splice(questionIndex, 1);
 
-				generateQuestion();
+				generateQuestionRB();
 			};
 	
 		})
