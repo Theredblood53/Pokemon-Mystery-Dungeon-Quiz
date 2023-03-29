@@ -1,4 +1,4 @@
-var points = {Brave: 0, Hardy: 0, Docile: 0, Timid: 0, Relaxed: 0, Jolly: 0, Naive: 0, Sassy: 0, Impish: 0, Quirky: 0, Hasty: 0, Calm: 0, Lonely: 0};
+var genpoints = {Brave: 0, Hardy: 0, Docile: 0, Timid: 0, Relaxed: 0, Jolly: 0, Naive: 0, Sassy: 0, Impish: 0, Quirky: 0, Hasty: 0, Calm: 0, Lonely: 0};
 
 var questions = [
 	{
@@ -138,7 +138,7 @@ function generateQuestion()
 				{
 					if (points.hasOwnProperty(category))
 					{
-						points[category] += points[category];
+						genpoints[category] += points[category];
 					}
 				}
 
@@ -157,19 +157,19 @@ function generateQuestion()
 
 function calculateResult()
 {
-	var bravePoints = points.Brave;
-	var hardyPoints = points.Hardy;
-	var docilePoints = points.Docile;
-	var timidPoints = points.Timid;
-	var relaxedPoints = points.Relaxed;
-	var jollyPoints = points.Jolly;
-	var naivePoints = points.Naive;
-	var sassyPoints = points.Sassy;
-	var impishPoints = points.Impish;
-	var quirkyPoints = points.Quirky;
-	var hastyPoints = points.Hasty;
-	var calmPoints = points.Calm;
-	var lonelyPoints = points.Lonely;
+	var bravePoints = genpoints.Brave;
+	var hardyPoints = genpoints.Hardy;
+	var docilePoints = genpoints.Docile;
+	var timidPoints = genpoints.Timid;
+	var relaxedPoints = genpoints.Relaxed;
+	var jollyPoints = genpoints.Jolly;
+	var naivePoints = genpoints.Naive;
+	var sassyPoints = genpoints.Sassy;
+	var impishPoints = genpoints.Impish;
+	var quirkyPoints = genpoints.Quirky;
+	var hastyPoints = genpoints.Hasty;
+	var calmPoints = genpoints.Calm;
+	var lonelyPoints = genpoints.Lonely;
 
 	var maxPoints = Math.max(bravePoints, hardyPoints, docilePoints, timidPoints, relaxedPoints, jollyPoints, naivePoints, sassyPoints, impishPoints, quirkyPoints, hastyPoints, calmPoints, lonelyPoints);
   
