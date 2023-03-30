@@ -490,6 +490,18 @@ function generateQuestionRB()
 		var resultElement = document.getElementById("result");
 		resultElement.style.display = "block";
 		
+		var textMElement = document.getElementById("textM");
+		textMElement.style.display = "block";
+	
+		var textFElement = document.getElementById("textF");
+		textFElement.style.display = "block";
+		
+		var portraitMElement = document.getElementById("portraitM");
+		portraitMElement.style.display = "block";
+	
+		var portraitFElement = document.getElementById("portraitF");
+		portraitFElement.style.display = "block";
+		
 		resultElement.innerHTML = "You are a " + calculateResult() + " Pokemon";
 		
 		var parent = document.getElementById("portraitM");
@@ -547,7 +559,7 @@ function generateQuestionRB()
 			parent.appendChild(Mudkip);
 		}
 		
-		var parent = document.getElementById("portraitF");
+		parent = document.getElementById("portraitF");
 		
 		if (calculateResult() === "Calm")
 		{
@@ -604,6 +616,18 @@ function generateQuestionRB()
 		
 		return;
 	}
+	
+	var textMElement = document.getElementById("textM");
+	textMElement.style.display = "none";
+	
+	var textFElement = document.getElementById("textF");
+	textFElement.style.display = "none";
+	
+	var portraitMElement = document.getElementById("portraitM");
+	portraitMElement.style.display = "none";
+	
+	var portraitFElement = document.getElementById("portraitF");
+	portraitFElement.style.display = "none";
 	
 	var resultElement = document.getElementById("result");
 	resultElement.style.display = "none";
