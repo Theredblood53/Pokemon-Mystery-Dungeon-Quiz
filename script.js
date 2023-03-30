@@ -423,6 +423,56 @@ var questionsRB = [
 	}
 ];
 
+var Bulbasaur = document.createElement("img");
+var Charmander = document.createElement("img");
+var Squirtle = document.createElement("img");
+var Pikachu = document.createElement("img");
+var Meowth = document.createElement("img");
+var Psyduck = document.createElement("img");
+var Machop = document.createElement("img");
+var Cubone = document.createElement("img");
+var Vulpix = document.createElement("img");
+var Eevee = document.createElement("img");
+var Chikorita = document.createElement("img");
+var Cyndaquil = document.createElement("img");
+var Totodile = document.createElement("img");
+var Phanpy = document.createElement("img");
+var Treecko = document.createElement("img");
+var Torchic = document.createElement("img");
+var Mudkip = document.createElement("img");
+var Skitty = document.createElement("img");
+var Turtwig = document.createElement("img");
+var Chimchar = document.createElement("img");
+var Piplup = document.createElement("img");
+var Munchlax = document.createElement("img");
+var Shinx = document.createElement("img");
+var Riolu = document.createElement("img");
+
+Bulbasaur.src = "Portraits/Bulbasaur.png";
+Charmander.src = "Portraits/Charmander.png";
+Squirtle.src = "Portraits/Squirtle.png";
+Pikachu.src = "Portraits/Pikachu.png";
+Meowth.src = "Portraits/Meowth.png";
+Psyduck.src = "Portraits/Psyduck.png";
+Machop.src = "Portraits/Machop.png";
+Cubone.src = "Portraits/Cubone.png";
+Vulpix.src = "Portraits/Vulpix.png";
+Eevee.src = "Portraits/Eevee.png";
+Chikorita.src = "Portraits/Chikorita.png";
+Cyndaquil.src = "Portraits/Cyndaquil.png";
+Totodile.src = "Portraits/Totodile.png";
+Phanpy.src = "Portraits/Phanpy.png";
+Treecko.src = "Portraits/Treecko.png";
+Torchic.src = "Portraits/Torchic.png";
+Mudkip.src = "Portraits/Mudkip.png";
+Skitty.src = "Portraits/Skitty.png";
+Turtwig.src = "Portraits/Turtwig.png";
+Chimchar.src = "Portraits/Chimchar.png";
+Piplup.src = "Portraits/Piplup.png";
+Munchlax.src = "Portraits/Munchlax.png";
+Shinx.src = "Portraits/Shinx.png";
+Riolu.src = "Portraits/Riolu.png";
+
 var questionIndex = 0;
 
 var questionsRBminus8 = questionsRB.length - 8;
@@ -441,6 +491,117 @@ function generateQuestionRB()
 		resultElement.style.display = "block";
 		
 		resultElement.innerHTML = "You are a " + calculateResult() + " Pokemon";
+		
+		var parent = document.getElementById("portraitM");
+		
+		if (calculateResult() === "Docile")
+		{
+			parent.appendChild(Bulbasaur);
+		}
+		else if (calculateResult() === "Hardy")
+		{
+			parent.appendChild(Charmander);
+		}
+		else if (calculateResult() === "Jolly")
+		{
+			parent.appendChild(Squirtle);
+		}
+		else if (calculateResult() === "Impish")
+		{
+			parent.appendChild(Pikachu);
+		}
+		else if (calculateResult() === "Quirky")
+		{
+			parent.appendChild(Meowth);
+		}
+		else if (calculateResult() === "Relaxed")
+		{
+			parent.appendChild(Psyduck);
+		}
+		else if (calculateResult() === "Brave")
+		{
+			parent.appendChild(Machop);
+		}
+		else if (calculateResult() === "Lonely")
+		{
+			parent.appendChild(Cubone);
+		}
+		else if (calculateResult() === "Timid")
+		{
+			parent.appendChild(Cyndaquil);
+		}
+		else if (calculateResult() === "Naive")
+		{
+			parent.appendChild(Totodile);
+		}
+		else if (calculateResult() === "Sassy")
+		{
+			parent.appendChild(Treecko);
+		}
+		else if (calculateResult() === "Hasty")
+		{
+			parent.appendChild(Torchic);
+		}
+		else if (calculateResult() === "Calm")
+		{
+			parent.appendChild(Mudkip);
+		}
+		
+		var parent = document.getElementById("portraitF");
+		
+		if (calculateResult() === "Calm")
+		{
+			parent.appendChild(Bulbasaur);
+		}
+		else if (calculateResult() === "Brave")
+		{
+			parent.appendChild(Charmander);
+		}
+		else if (calculateResult() === "Relaxed")
+		{
+			parent.appendChild(Squirtle);
+		}
+		else if (calculateResult() === "Hardy")
+		{
+			parent.appendChild(Pikachu);
+		}
+		else if (calculateResult() === "Lonely")
+		{
+			parent.appendChild(Psyduck);
+		}
+		else if (calculateResult() === "Impish")
+		{
+			parent.appendChild(Cubone);
+		}
+		else if (calculateResult() === "Naive")
+		{
+			parent.appendChild(Eevee);
+		}
+		else if (calculateResult() === "Docile")
+		{
+			parent.appendChild(Chikorita);
+		}
+		else if (calculateResult() === "Jolly")
+		{
+			parent.appendChild(Totodile);
+		}
+		else if (calculateResult() === "Quirky")
+		{
+			parent.appendChild(Treecko);
+		}
+		else if (calculateResult() === "Sassy")
+		{
+			parent.appendChild(Torchic);
+		}
+		else if (calculateResult() === "Timid")
+		{
+			parent.appendChild(Mudkip);
+		}
+		else if (calculateResult() === "Hasty")
+		{
+			parent.appendChild(Skitty);
+		}
+		
 		return;
 	}
 	
