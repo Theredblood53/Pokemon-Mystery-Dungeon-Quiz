@@ -1,4 +1,4 @@
-var genpoints = {Brave: 0, Hardy: 0, Docile: 0, Timid: 0, Relaxed: 0, Jolly: 0, Naive: 0, Sassy: 0, Impish: 0, Quirky: 0, Hasty: 0, Calm: 0, Lonely: 0, Aliens: 0};
+var genpoints = {Brave: 0, Hardy: 0, Docile: 0, Timid: 0, Relaxed: 0, Jolly: 0, Naive: 0, Sassy: 0, Impish: 0, Quirky: 0, Hasty: 0, Calm: 0, Lonely: 0, Bold: 0, Rash: 0, Quiet:0, Other: 0};
 
 var questionsRB = [
 	{
@@ -318,7 +318,7 @@ var questionsRB = [
 	{
 		question: "There is an alien invasion! What will you do?",
 		answers: [
-			{answer: "Fight", points: {Aliens: 1}},
+			{answer: "Fight", points: {Other: 1}},
 			{answer: "Run", points: {Timid: 2}},
 			{answer: "Ignore it", points: {Relaxed: 2}}
 		]
@@ -423,6 +423,500 @@ var questionsRB = [
 	}
 ];
 
+var questionsTD = [
+	{
+		question: "Do you think that you might be a genius?",
+		answers: [
+			{answer: "Certainly!", points: {Sassy: 4, Naive: 2, Jolly: 2}},
+			{answer: "Well, not really...", points: {Hardy: 2}}
+		]
+	},
+	{
+		question: "Have you had any hobbies for a long time?",
+		answers: [
+			{answer: "Yes", points: {Hardy: 4}},
+			{answer: "No", points: {Quirky: 4, Hasty: 2}}
+		]
+	},
+	{
+		question: "Have you ever accidentally revealed a personal secret that someone shared with you?",
+		answers: [
+			{answer: "Yes", points: {Rash: 4, Lonely: 4}},
+			{answer: "No", points: {Hardy: 2}}
+		]
+	},
+	{
+		question: "Do you like to do things according to plan?",
+		answers: [
+			{answer: "Of course!", points: {Hardy: 4}},
+			{answer: "I'm not good at planning", points: {Quirky: 4, Rash: 2}},
+			{answer: "Plans? Who needs plans?", points: {Relaxed: 4}}
+		]
+	},
+	{
+		question: "You have to move a heavy suitcase. What will you do?",
+		answers: [
+			{answer: "Carry it by myself", points: {Hardy: 4, Brave: 2}},
+			{answer: "Ask someone to help", points: {Docile: 2}},
+			{answer: "Make someone else do it!", points: {Bold: 4, Sassy: 2}}
+		]
+	},
+	{
+		question: "You have a really important test tomorrow! What do you do?",
+		answers: [
+			{answer: "Study all night long", points: {Hardy: 4}},
+			{answer: "Wing it! I'm sure it will be fine!", points: {Relaxed: 4}},
+			{answer: "Test?! I think I have a fever...", points: {Naive: 4}}
+		]
+	},
+	{
+		question: "You attend a fine dinner at a friend's house. How do you behave?",
+		answers: [
+			{answer: "Devour the food heartily!", points: {Impish: 4, Naive: 4}},
+			{answer: "Enjoy the meal in polite moderation", points: {Hardy: 2}},
+			{answer: "Ask to take the leftovers home!", points: {Bold: 4}}
+		]
+	},
+	{
+		question: "Would you ever consider sticking to a plan to do ten sit-ups a day?",
+		answers: [
+			{answer: "Yes! That's easy!", points: {Impish: 4, Sassy: 4}},
+			{answer: "Yes. Hard work, though", points: {Hardy: 4}},
+			{answer: "No! Who'd want to do that?!", points: {Quirky: 4}}
+		]
+	},
+	{
+		question: "You're packing your classroom's snacks for a picnic when you get hungry. What do you do?",
+		answers: [
+			{answer: "Eat just a tiny bit", points: {Hasty: 4}},
+			{answer: "Hold myself back and pack it all up", points: {Hardy: 4}},
+			{answer: "What snacks? They're in my belly!", points: {Rash: 4}}
+		]
+	},
+	{
+		question: "You've just stuffed yourself with a good meal when a great dessert arrives. What do you do?",
+		answers: [
+			{answer: "Eat it. Who cares if I'm stuffed?", points: {Hasty: 4, Rash: 4}},
+			{answer: "Turn it down. It's too fattening!", points: {Hardy: 4}},
+			{answer: "Yum! I love dessert the most!", points: {Bold: 4, Jolly: 4, Relaxed: 2}}
+		]
+	},
+	{
+		question: "You're in the final mile of a marathon, but the last stretch is exhausting! What will you do?",
+		answers: [
+			{answer: "Hang in there and finish!", points: {Hardy: 4, Brave: 2}},
+			{answer: "Stop running", points: {Quirky: 4}},
+			{answer: "Find a shortcut", points: {Bold: 4, Rash: 2}}
+		]
+	},
+	{
+		question: "You've spent forever stacking dominoes... One more and you're done... OH, NO! You knocked them over! What do you do?",
+		answers: [
+			{answer: "I'm too crushed to start again", points: {Hardy: 4}},
+			{answer: "I unleash my full fury!", points: {Docile: 4}},
+			{answer: "I set up the dominoes again...", points: {Calm: 4, Bold: 4}}
+		]
+	},
+	{
+		question: "What do you do with your allowance?",
+		answers: [
+			{answer: "Save it!", points: {Hardy: 4}},
+			{answer: "Spend it!", points: {Quirky: 4, Hasty: 2}},
+			{answer: "Spend half, save half", points: {Calm: 2}},
+			{answer: "I don't get an allowance!", points: {Lonely: 4}}
+		]
+	},
+	{
+		question: "Can you strike up conversations with new people easily?",
+		answers: [
+			{answer: "Yes!", points: {Jolly: 4, Bold: 4}},
+			{answer: "No", points: {Timid: 2, Docile: 2}}
+		]
+	},
+	{
+		question: "If you don't know something, do you come clean and admit it?",
+		answers: [
+			{answer: "Of course", points: {Docile: 4, Bold: 2}},
+			{answer: "That's not easy to admit!", points: {Timid: 4, Lonely: 2}}
+		]
+	},
+	{
+		question: "Do you find yourself jumping to the wrong conclusion a lot of the time?",
+		answers: [
+			{answer: "Yes", points: {Hasty: 4, Rash: 4}},
+			{answer: "No", points: {Docile: 2, Quiet: 2}}
+		]
+	},
+	{
+		question: "A fortune-teller says that you have a bad future ahead of you. How do you react?",
+		answers: [
+			{answer: "Worry about it!", points: {Docile: 4, Timid: 2}},
+			{answer: "Forget about it", points: {Jolly: 4, Relaxed: 2, Bold: 2}}
+		]
+	},
+	{
+		question: "How do you blow up a balloon?",
+		answers: [
+			{answer: "As close to breaking as possible!", points: {Brave: 4, Impish: 4}},
+			{answer: "Big... but not too big!", points: {Quiet: 2}},
+			{answer: "I don't... It could pop!", points: {Timid: 4, Docile: 2}}
+		]
+	},
+	{
+		question: "Do you think that lies are sometimes necessary?",
+		answers: [
+			{answer: "Yes", points: {Quiet: 4, Bold: 4}},
+			{answer: "No", points: {Brave: 4}},
+			{answer: "I don't know", points: {Docile: 4}}
+		]
+	},
+	{
+		question: "You hear a rumor that might make you rich! What do you do?",
+		answers: [
+			{answer: "Keep it all to myself", points: {Bold: 4, Timid: 2}},
+			{answer: "Share it with friends", points: {Docile: 4, Rash: 4}},
+			{answer: "Spread a different rumor!", points: {Impish: 4}}
+		]
+	},
+	{
+		question: "Your friend says that your shirt is inside out. What do you do?",
+		answers: [
+			{answer: "Get embarrassed!", points: {Docile: 4}},
+			{answer: "Laugh out loud!", points: {Rash: 4}},
+			{answer: "Say that it's the latest fashion!", points: {Jolly: 4}}
+		]
+	},
+	{
+		question: "Your friend tells a joke that's horribly corny! How do you react?",
+		answers: [
+			{answer: "Roll around the floor laughing!", points: {Jolly: 4, Naive: 2}},
+			{answer: "Just let it go by...", points: {Impish: 2, Docile: 2}},
+			{answer: "Slap my forehead and groan", points: {Brave: 4}}
+		]
+	},
+	{
+		question: "You're on a walk when you smell something delicious. What do you do?",
+		answers: [
+			{answer: "Try to imagine what it is", points: {Docile: 4}},
+			{answer: "Find out what it is!", points: {Naive: 2 , Rash: 2}},
+			{answer: "Think about how hungry I am...", points: {Impish: 4}}
+		]
+	},
+	{
+		question: "You're eating at a restaurant when you abruptly realize that everyone's gone! What do you do?",
+		answers: [
+			{answer: "Alone?! I look for an employee!", points: {Lonely: 4, Docile: 4}},
+			{answer: "Who's worried? I keep eating", points: {Jolly: 4, Relaxed: 4}},
+			{answer: "I swipe food from other tables!", points: {Bold: 4}}
+		]
+	},
+	{
+		question: "You're told to wait in a big, empty room. What do you do?",
+		answers: [
+			{answer: "Wait quietly", points: {Docile: 4}},
+			{answer: "Search for something to do", points: {Naive: 4}},
+			{answer: "Wander outside", points: {Rash: 4}},
+			{answer: "Cradle my knees and sit in the corner!", points: {Lonely: 4}}
+		]
+	},
+	{
+		question: "Hey, what's that? There's someone behind you! So... did you look just now?",
+		answers: [
+			{answer: "Don't do that! It scared me!", points: {Timid: 4}},
+			{answer: "OK, I admit it. You tricked me", points: {Docile: 4}},
+			{answer: "No way. I didn't fall for it", points: {Sassy: 4, Lonely: 4}},
+			{answer: "Huh? What?", points: {Relaxed: 4}}
+		]
+	},
+	{
+		question: "Your friend takes a spectacular fall! What do you do?",
+		answers: [
+			{answer: "Help my friend up!", points: {Brave: 4, Lonely: 2}},
+			{answer: "Laugh! It's too funny!", points: {Naive: 4, Impish: 4, Rash: 4}}
+		]
+	},
+	{
+		question: "Do you think that anything goes when it comes to winning?",
+		answers: [
+			{answer: "Of course!", points: {Quiet: 4, Sassy: 4}},
+			{answer: "No way!", points: {Brave: 4}}
+		]
+	},
+	{
+		question: "You discover a secret passage in a basement. What do you do?",
+		answers: [
+			{answer: "Go through it!", points: {Impish: 4, Brave: 4, Rash: 2, Hasty: 4}},
+			{answer: "Stay away from it", points: {Timid: 2}}
+		]
+	},
+	{
+		question: "Would you feel comfortable stating your opinion to a very important person?",
+		answers: [
+			{answer: "Of course!", points: {Sassy: 4, Brave: 4, Bold: 2}},
+			{answer: "Not really", points: {Timid: 2}}
+		]
+	},
+	{
+		question: "Do you state your opinion even when it's not what everyone else thinks?",
+		answers: [
+			{answer: "Yes!", points: {Brave: 4, Bold: 2}},
+			{answer: "No", points: {Lonely: 4, Timid: 2}},
+			{answer: "It depends on the situation", points: {Calm: 2, Quirky: 2}}
+		]
+	},
+	{
+		question: "You're on a stroll when a TV crew pounces on you for an interview. What do you do?",
+		answers: [
+			{answer: "Run away! How embarrassing!", points: {Timid: 4}},
+			{answer: "Answer questions properly", points: {Brave: 4, Sassy: 4}},
+			{answer: "Yuck it up! Woo-hoo! I'm on TV!", points: {Naive: 4, Bold: 2}}
+		]
+	},
+	{
+		question: "You see a cake that is past its expiration date, but only by one day. What do you do?",
+		answers: [
+			{answer: "Not a problem! Chow time!", points: {Brave: 4, Relaxed: 2}},
+			{answer: "Think about it briefly, then decide", points: {Timid: 2}},
+			{answer: "Get someone to try it first", points: {Bold: 4}}
+		]
+	},
+	{
+		question: "You're in class when you realize that you really have to go to the restroom! What do you do?",
+		answers: [
+			{answer: "Ask for permission to leave", points: {Brave: 4, Bold: 4}},
+			{answer: "Sneak out", points: {Hasty: 2}},
+			{answer: "Hold on until class ends!", points: {Timid: 2}}
+		]
+	},
+	{
+		question: "Someone who works at a store suggests an item that isn't quite what you're looking for. But you like this person. What do you do?",
+		answers: [
+			{answer: "Say you don't want it", points: {Brave: 2, Quiet: 2}},
+			{answer: "Say thanks...but say no", points: {Calm: 4, Lonely: 2}},
+			{answer: "Cave in and buy it", points: {Rash: 2, Timid: 2}}
+		]
+	},
+	{
+		question: "You want to reveal that you like someone a whole bunch! What do you do?",
+		answers: [
+			{answer: "Show it a little by playing together", points: {Jolly: 4, Calm: 2}},
+			{answer: "Make it obvious by... playing a prank!", points: {Lonely: 4, Naive: 2}},
+			{answer: "State it clearly for all to hear!", points: {Brave: 4, Impish: 4, Bold: 2}},
+			{answer: "Keep it to myself! It's too risky!", points: {Timid: 2}}
+		]
+	},
+	{
+		question: "Do you find yourself humming or singing often?",
+		answers: [
+			{answer: "All the time!", points: {Relaxed: 4, Jolly: 2}},
+			{answer: "Never", points: {Quiet: 2}}
+		]
+	},
+	{
+		question: "You feel a burst of happiness! How about expressing it with a little dance?",
+		answers: [
+			{answer: "Yes!", points: {Jolly: 4, Lonely: 2}},
+			{answer: "No", points: {Calm: 2}}
+		]
+	},
+	{
+		question: "You see a parade coming down the street. What do you do?",
+		answers: [
+			{answer: "Stay on the sidelines", points: {Calm: 2}},
+			{answer: "Join the parade!", points: {Jolly: 4, Naive: 4}},
+			{answer: "Walk away", points: {Sassy: 4, Lonely: 2}}
+		]
+	},
+	{
+		question: "You're in a play with friends. What kind of a role do you prefer?",
+		answers: [
+			{answer: "Starring role!", points: {Bold: 4}},
+			{answer: "Supporting role", points: {Jolly: 4}},
+			{answer: "Just a bit part", points: {Quirky: 4}}
+		]
+	},
+	{
+		question: "You spot a deserted ship on the high seas! What do you think the ship holds?",
+		answers: [
+			{answer: "Precious loot!", points: {Naive: 4, Jolly: 2}},
+			{answer: "Ghosts!", points: {Timid: 2}},
+			{answer: "Nothing! The ship is merely a mirage!", points: {Quiet: 2}}
+		]
+	},
+	{
+		question: "You're daydreaming...when your friend sprays you with water! What do you do?",
+		answers: [
+			{answer: "Get mad!", points: {Hasty: 4}},
+			{answer: "Get sad", points: {Lonely: 4}},
+			{answer: "Woo-hoo! Water fight!", points: {Jolly: 4, Naive: 4, Impish: 4}}
+		]
+	},
+	{
+		question: "You're about to take the last cookie when your friend wolfs it down! What do you do?",
+		answers: [
+			{answer: "Whatever. It's just a cookie", points: {Calm: 4}},
+			{answer: "I unleash my cookie fury!", points: {Relaxed: 4, Jolly: 4}},
+			{answer: "I weep for my lost cookie", points: {Lonely: 4}}
+		]
+	},
+	{
+		question: "Do you get injured a lot?",
+		answers: [
+			{answer: "Yes!", points: {Impish: 4, Rash: 4}},
+			{answer: "No", points: {Calm: 2}}
+		]
+	},
+	{
+		question: "What do you think of jungle exploration?",
+		answers: [
+			{answer: "Sounds fun!", points: {Impish: 4, Naive: 2}},
+			{answer: "Not interested", points: {Quirky: 3, Timid: 2}}
+		]
+	},
+	{
+		question: "Have you ever upset a friend when you were just kidding around?",
+		answers: [
+			{answer: "Yes", points: {Naive: 4, Impish: 2}},
+			{answer: "No", points: {Calm: 4}}
+		]
+	},
+	{
+		question: "You see a ball on the ground. What do you do?",
+		answers: [
+			{answer: "Kick it!", points: {Hasty: 2, Sassy: 2}},
+			{answer: "Throw it!", points: {Impish: 2}},
+			{answer: "Spiff it up, shiny and new!", points: {Lonely: 4}}
+		]
+	},
+	{
+		question: "Have you ever wanted to communicate with aliens from another planet?",
+		answers: [
+			{answer: "Yes!", points: {Naive: 4}},
+			{answer: "No", points: {Quiet: 2}}
+		]
+	},
+	{
+		question: "Your friends seem to be having a fun chat out of earshot. What do you do?",
+		answers: [
+			{answer: "Join them and chat along!", points: {Naive: 4}},
+			{answer: "Nothing... I'm not interested", points: {Lonely: 4}},
+			{answer: "Eavesdrop from a distance!", points: {Timid: 2}}
+		]
+	},
+	{
+		question: "You think you hear someone call your name. But no one's around... so what was it?",
+		answers: [
+			{answer: "Just my imagination", points: {Relaxed: 4}},
+			{answer: "Someone fooling around", points: {Naive: 4, Bold: 2}},
+			{answer: "A ghost! ", points: {Timid: 4}}
+		]
+	},
+	{
+		question: "You muster your courage and go to a graveyard at night... and see a woman soaked to the skin just standing there! What do you do?",
+		answers: [
+			{answer: "Run away at full speed!", points: {Timid: 2}},
+			{answer: "So what? It's just a lady", points: {Naive: 4, Sassy: 2}},
+			{answer: "Drop down and play dead!", points: {Rash: 4}}
+		]
+	},
+	{
+		question: "The phone's ringing! What do you do?",
+		answers: [
+			{answer: "Answer right away!", points: {Hasty: 4, Lonely: 4}},
+			{answer: "Wait a bit before answering", points: {Quiet: 2}},
+			{answer: "Ignore it and let it ring", points: {Timid: 2}}
+		]
+	},
+	{
+		question: "Your friend is crying right in front of you! What made that happen?",
+		answers: [
+			{answer: "Someone bullied my friend!", points: {Hasty: 4}},
+			{answer: "My friend fell down, no doubt!", points: {Quiet: 4}},
+			{answer: "I wonder if it's my fault?", points: {Timid: 2}}
+		]
+	},
+	{
+		question: "You run into a new person that you haven't talked to very much before. What do you do?",
+		answers: [
+			{answer: "Make small talk", points: {Calm: 2}},
+			{answer: "Say nothing!", points: {Quirky: 2}},
+			{answer: "Make an excuse to get away!", points: {Timid: 4}}
+		]
+	},
+	{
+		question: "Do you change the channels often while watching TV?",
+		answers: [
+			{answer: "Yes!", points: {Hasty: 4}},
+			{answer: "No", points: {Calm: 2}}
+		]
+	},
+	{
+		question: "You don't get bothered by noise and ruckus nearby, do you?",
+		answers: [
+			{answer: "Yes!", points: {Bold: 4, Relaxed: 2}},
+			{answer: "Not at all", points: {Lonely: 4, Hasty: 2}}
+		]
+	},
+	{
+		question: "Do you have lots of stuff you bought, thinking it was all cool, but don't use anymore?",
+		answers: [
+			{answer: "Yes", points: {Quirky: 4, Rash: 2, Hasty: 2}},
+			{answer: "No", points: {Quiet: 2}}
+		]
+	},
+	{
+		question: "You find something at a great bargain! What do you do?",
+		answers: [
+			{answer: "Buy it right away!", points: {Hasty: 4}},
+			{answer: "Think about whether you need it", points: {Quiet: 2}},
+			{answer: "Demand an even bigger discount!", points: {Bold: 4}}
+		]
+	},
+	{
+		question: "Are you a rebel at heart?",
+		answers: [
+			{answer: "Totally!", points: {Sassy: 4}},
+			{answer: "Of course not", points: {Calm: 2}}
+		]
+	},
+	{
+		question: "Do you like being the center of attention?",
+		answers: [
+			{answer: "Yes!", points: {Lonely: 4, Sassy: 4}},
+			{answer: "Not at all", points: {Relaxed: 2}}
+		]
+	},
+	{
+		question: "When walking in a group, do you tend to be the one at the front?",
+		answers: [
+			{answer: "Of course!", points: {Sassy: 4, Lonely: 2}},
+			{answer: "No", points: {Calm: 4, Quirky: 2}}
+		]
+	},
+	{
+		question: "Are you a city person or a country person?",
+		answers: [
+			{answer: "I like the city!", points: {Lonely: 4, Sassy: 2}},
+			{answer: "I like the country!", points: {Calm: 4}},
+			{answer: "I like them both!", points: {Quirky: 4}}
+		]
+	},
+	{
+		question: "Do you often cancel plans to meet others at the last second?",
+		answers: [
+			{answer: "Yes", points: {Quirky: 4, Rash: 4}},
+			{answer: "No", points: {Calm: 2}}
+		]
+	},
+	{
+		question: "Do you often forget to lock the door when you go out?",
+		answers: [
+			{answer: "Yes", points: {Rash: 4, Bold: 2}},
+			{answer: "No", points: {Quiet: 2}}
+		]
+	}
+];
+
 var Bulbasaur = document.createElement("img");
 var Charmander = document.createElement("img");
 var Squirtle = document.createElement("img");
@@ -476,6 +970,8 @@ Riolu.src = "Portraits/Riolu.png";
 var questionIndex = 0;
 
 var questionsRBminus8 = questionsRB.length - 8;
+var questionsTDminus8 = questionsTD.length - 8;
+var questionsEOSminus8 = questionsEOS.length - 8;
 
 function generateQuestionRB()
 {
@@ -632,13 +1128,13 @@ function generateQuestionRB()
 	var resultElement = document.getElementById("result");
 	resultElement.style.display = "none";
 	
-	if (genpoints.Aliens === 0)
+	if (genpoints.Other === 0)
 	{
 		questionIndex = Math.floor(Math.random() * questionsRB.length);
 	}
 	else
 	{
-		genpoints.Aliens = 0;
+		genpoints.Other = 0;
 	}
 	
 	var question = questionsRB[questionIndex];
@@ -681,6 +1177,227 @@ function generateQuestionRB()
 	}
 };
 
+function generateQuestionTD()
+{
+	if (questionsTD.length === questionsTDminus8)
+	{
+		var questionElement = document.getElementById("question");
+		questionElement.style.display = "none";
+
+		var answersElement = document.getElementById("answers");
+		answersElement.style.display = "none";
+
+		var resultElement = document.getElementById("result");
+		resultElement.style.display = "block";
+		
+		var textMElement = document.getElementById("textM");
+		textMElement.style.display = "block";
+	
+		var textFElement = document.getElementById("textF");
+		textFElement.style.display = "block";
+		
+		var portraitMElement = document.getElementById("portraitM");
+		portraitMElement.style.display = "block";
+	
+		var portraitFElement = document.getElementById("portraitF");
+		portraitFElement.style.display = "block";
+		
+		resultElement.innerHTML = "You are a " + calculateResult() + " Pokemon";
+		
+		var parent = document.getElementById("portraitM");
+		
+		if (calculateResult() === "Lonely")
+		{
+			parent.appendChild(Bulbasaur);
+		}
+		else if (calculateResult() === "Docile")
+		{
+			parent.appendChild(Charmander);
+		}
+		else if (calculateResult() === "Quirky")
+		{
+			parent.appendChild(Squirtle);
+		}
+		else if (calculateResult() === "Brave")
+		{
+			parent.appendChild(Pikachu);
+		}
+		else if (calculateResult() === "Sassy")
+		{
+			parent.appendChild(Meowth);
+		}
+		else if (calculateResult() === "Calm")
+		{
+			parent.appendChild(Chikorita);
+		}
+		else if (calculateResult() === "Timid")
+		{
+			parent.appendChild(Cyndaquil);
+		}
+		else if (calculateResult() === "Jolly")
+		{
+			parent.appendChild(Totodile);
+		}
+		else if (calculateResult() === "Quiet")
+		{
+			parent.appendChild(Treecko);
+		}
+		else if (calculateResult() === "Hardy")
+		{
+			parent.appendChild(Torchic);
+		}
+		else if (calculateResult() === "Rash")
+		{
+			parent.appendChild(Mudkip);
+		}
+		else if (calculateResult() === "Hasty")
+		{
+			parent.appendChild(Skitty);
+		}
+		else if (calculateResult() === "Bold")
+		{
+			parent.appendChild(Turtwig);
+		}
+		else if (calculateResult() === "Naive")
+		{
+			parent.appendChild(Chimchar);
+		}
+		else if (calculateResult() === "Impish")
+		{
+			parent.appendChild(Piplup);
+		}
+		else if (calculateResult() === "Relaxed")
+		{
+			parent.appendChild(Munchlax);
+		}
+		
+		parent = document.getElementById("portraitF");
+		
+		if (calculateResult() === "Docile")
+		{
+			parent.appendChild(Bulbasaur);
+		}
+		else if (calculateResult() === "Brave")
+		{
+			parent.appendChild(Charmander);
+		}
+		else if (calculateResult() === "Bold")
+		{
+			parent.appendChild(Squirtle);
+		}
+		else if (calculateResult() === "Hasty")
+		{
+			parent.appendChild(Pikachu);
+		}
+		else if (calculateResult() === "Relaxed")
+		{
+			parent.appendChild(Meowth);
+		}
+		else if (calculateResult() === "Quiet")
+		{
+			parent.appendChild(Chikorita);
+		}
+		else if (calculateResult() === "Calm")
+		{
+			parent.appendChild(Cyndaquil);
+		}
+		else if (calculateResult() === "Sassy")
+		{
+			parent.appendChild(Totodile);
+		}
+		else if (calculateResult() === "Hardy")
+		{
+			parent.appendChild(Treecko);
+		}
+		else if (calculateResult() === "Rash")
+		{
+			parent.appendChild(Torchic);
+		}
+		else if (calculateResult() === "Lonely")
+		{
+			parent.appendChild(Mudkip);
+		}
+		else if (calculateResult() === "Naive")
+		{
+			parent.appendChild(Skitty);
+		}
+		else if (calculateResult() === "Timid")
+		{
+			parent.appendChild(Turtwig);
+		}
+		else if (calculateResult() === "Impish")
+		{
+			parent.appendChild(Chimchar);
+		}
+		else if (calculateResult() === "Quirky")
+		{
+			parent.appendChild(Piplup);
+		}
+		else if (calculateResult() === "Jolly")
+		{
+			parent.appendChild(Munchlax);
+		}
+		
+		return;
+	}
+	
+	var textMElement = document.getElementById("textM");
+	textMElement.style.display = "none";
+	
+	var textFElement = document.getElementById("textF");
+	textFElement.style.display = "none";
+	
+	var portraitMElement = document.getElementById("portraitM");
+	portraitMElement.style.display = "none";
+	
+	var portraitFElement = document.getElementById("portraitF");
+	portraitFElement.style.display = "none";
+	
+	var resultElement = document.getElementById("result");
+	resultElement.style.display = "none";
+	
+	questionIndex = Math.floor(Math.random() * questionsRB.length);
+	
+	var question = questionsTD[questionIndex];
+
+	var questionElement = document.getElementById("question");
+	questionElement.innerHTML = question.question;
+
+	var answersElement = document.getElementById("answers");
+	answersElement.innerHTML = "";
+	
+	for (var n = 0; n < question.answers.length; n++)
+	{
+		
+		var answer = question.answers[n];
+		var button = document.createElement("button");
+		
+		button.innerHTML = answer.answer;
+		
+		button.onclick = (function(points)
+		{
+			return function()
+			{
+				for (var category in points)
+				{
+					if (points.hasOwnProperty(category))
+					{
+						genpoints[category] += points[category];
+					}
+				}
+
+				questionsTD.splice(questionIndex, 1);
+
+				generateQuestionTD();
+			};
+		})
+		(answer.points);
+
+		answersElement.appendChild(button);
+		
+	}
+};
+
 function calculateResult()
 {
 	var bravePoints = genpoints.Brave;
@@ -696,9 +1413,12 @@ function calculateResult()
 	var hastyPoints = genpoints.Hasty;
 	var calmPoints = genpoints.Calm;
 	var lonelyPoints = genpoints.Lonely;
+	var boldPoints = genpoints.Bold;
+	var rashPoints = genpoints.Rash;
+	var quietPoints = genpoints.Quiet;
 
-	var maxPoints = Math.max(bravePoints, hardyPoints, docilePoints, timidPoints, relaxedPoints, jollyPoints, naivePoints, sassyPoints, impishPoints, quirkyPoints, hastyPoints, calmPoints, lonelyPoints);
-  
+	var maxPoints = Math.max(bravePoints, hardyPoints, docilePoints, timidPoints, relaxedPoints, jollyPoints, naivePoints, sassyPoints, impishPoints, quirkyPoints, hastyPoints, calmPoints, lonelyPoints, boldPoints, rashPoints, quietPoints)
+	
 	if (maxPoints === bravePoints)
 	{
 		return "Brave";
@@ -750,5 +1470,17 @@ function calculateResult()
 	else if (maxPoints === lonelyPoints)
 	{
 		return "Lonely";
+	}
+	else if (maxPoints === boldPoints)
+	{
+		return "Bold";
+	}
+	else if (maxPoints === rashPoints)
+	{
+		return "Rash";
+	}
+	else if (maxPoints === quietPoints)
+	{
+		return "Quiet";
 	}
 }
