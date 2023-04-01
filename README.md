@@ -9,16 +9,19 @@ Current deployment page: https://theredblood53.github.io/Pokemon-Mystery-Dungeon
 # Changelog
 ### Version 0.4
 Changelog: 
->-Added Explorers of Time/Darkness quiz to the site, i was debating if doing it or not, but i decided to do it in the end.
+-Added Explorers of Time/Darkness quiz to the site, i was debating if doing it or not, but i decided to do it in the end.
+
 -Added a bunch, if not all the missing icons
 
 Working on the Explorers of Sky quiz now, then the main goal of the project will be complete
 
 ### Version 0.3.1
 Changelog:
->-Made the images high-res
+-Made the images high-res
+
 -Fixed 2 typos in the javascript file
->-Made it display the boy/girl option at the end
+
+-Made it display the boy/girl option at the end
 
 ### Version 0.3
 Changelog:
