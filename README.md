@@ -8,6 +8,14 @@ All of the assets have been re-created based on the original ones.
 Current deployment page: https://theredblood53.github.io/Pokemon-Mystery-Dungeon-Quiz
 
 # Changelog
+### Version 1.0
+Changelog:
+
+-Added the 3rd and final quiz, the Explorers of Time one
+
+-Modified a bit the borders
+
+
 ### Version 0.4
 Changelog:
 
