@@ -1469,7 +1469,7 @@ var questionsEOSminus8 = questionsEOS.length - 8;
 
 function generateQuestionRB()
 {
-	if (questionsEOS.length === questionsEOSminus8)
+	if (questionsRB.length === questionsRBminus8)
 	{
 		var questionElement = document.getElementById("question");
 		questionElement.style.display = "none";
@@ -1622,9 +1622,9 @@ function generateQuestionRB()
 	var resultElement = document.getElementById("result");
 	resultElement.style.display = "none";
 	
-	questionIndex = Math.floor(Math.random() * questionsEOS.length);
+	questionIndex = Math.floor(Math.random() * questionsRB.length);
 	
-	var question = questionsEOS[questionIndex];
+	var question = questionsRB[questionIndex];
 
 	var questionElement = document.getElementById("question");
 	questionElement.innerHTML = question.question;
@@ -1652,9 +1652,9 @@ function generateQuestionRB()
 					}
 				}
 
-				questionsEOS.splice(questionIndex, 1);
+				questionsRB.splice(questionIndex, 1);
 
-				generateQuestionEOS();
+				generateQuestionRB();
 			};
 		})
 		(answer.points);
@@ -1843,7 +1843,7 @@ function generateQuestionTD()
 	var resultElement = document.getElementById("result");
 	resultElement.style.display = "none";
 	
-	questionIndex = Math.floor(Math.random() * questionsRB.length);
+	questionIndex = Math.floor(Math.random() * questionsTD.length);
 	
 	var question = questionsTD[questionIndex];
 
