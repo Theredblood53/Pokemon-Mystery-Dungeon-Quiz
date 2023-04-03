@@ -8,6 +8,11 @@ All of the assets have been re-created based on the original ones.
 Current deployment page: https://theredblood53.github.io/Pokemon-Mystery-Dungeon-Quiz
 
 # Changelog
+### Version 1.0.2
+Changelog:
+
+-Added missing "è" and "é" letters to the font
+
 ### Version 1.0.1
 Changelog:
 
