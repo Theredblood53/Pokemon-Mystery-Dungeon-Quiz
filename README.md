@@ -11,6 +11,11 @@ Current deployment page: https://theredblood53.github.io/Pokemon-Mystery-Dungeon
 
 # Changelog
 
+### Version 2.1
+Changelog:
+
+-Fixed "Rule with the aliens?" question not showing when supposed to
+
 ### Version 2.0
 Changelog:
 

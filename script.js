@@ -1759,7 +1759,14 @@ function generateQuestionRB()
 	retryElement = document.getElementById("retry");
 	retryElement.style.display = "none";
 	
-	questionIndex = Math.floor(Math.random() * questionsRB.length);
+	if(genpoints.Other == 0)
+	{
+		questionIndex = Math.floor(Math.random() * questionsRB.length);
+	}
+	else
+	{
+		genpoints.Other = 0;
+	}
 	
 	question = questionsRB[questionIndex];
 
