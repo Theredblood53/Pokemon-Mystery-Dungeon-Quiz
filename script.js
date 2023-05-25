@@ -1435,6 +1435,7 @@ var Piplup = document.createElement("img");
 var Munchlax = document.createElement("img");
 var Shinx = document.createElement("img");
 var Riolu = document.createElement("img");
+var MissingImage = document.createElement("img");
 
 Bulbasaur.src = "Portraits/Bulbasaur.png";
 Charmander.src = "Portraits/Charmander.png";
@@ -1460,6 +1461,7 @@ Piplup.src = "Portraits/Piplup.png";
 Munchlax.src = "Portraits/Munchlax.png";
 Shinx.src = "Portraits/Shinx.png";
 Riolu.src = "Portraits/Riolu.png";
+MissingImage.src = "Portraits/MissingImage.png";
 
 var questionIndex = 0;
 
@@ -1467,169 +1469,304 @@ var questionsRBminus8 = questionsRB.length - 8;
 var questionsTDminus8 = questionsTD.length - 8;
 var questionsEOSminus8 = questionsEOS.length - 8;
 
+var question;
+var questionElement;
+var answersElement;
+var resultElement;
+var textMElement;
+var textFElement;
+var portraitMElement;
+var portraitFElement;
+var retryElement
+var parent;
+var endspeech;
+
 function generateQuestionRB()
 {
 	if (questionsRB.length === questionsRBminus8)
 	{
-		var questionElement = document.getElementById("question");
+		questionElement = document.getElementById("question");
 		questionElement.style.display = "none";
 
-		var answersElement = document.getElementById("answers");
+		answersElement = document.getElementById("answers");
 		answersElement.style.display = "none";
 
-		var resultElement = document.getElementById("result");
+		resultElement = document.getElementById("result");
 		resultElement.style.display = "block";
 		
-		var textMElement = document.getElementById("textM");
+		textMElement = document.getElementById("textM");
 		textMElement.style.display = "block";
 	
-		var textFElement = document.getElementById("textF");
+		textFElement = document.getElementById("textF");
 		textFElement.style.display = "block";
 		
-		var portraitMElement = document.getElementById("portraitM");
+		portraitMElement = document.getElementById("portraitM");
 		portraitMElement.style.display = "block";
 	
-		var portraitFElement = document.getElementById("portraitF");
+		portraitFElement = document.getElementById("portraitF");
 		portraitFElement.style.display = "block";
 		
-		resultElement.innerHTML = "You are a " + calculateResult() + " Pokemon";
+		retryElement = document.getElementById("retry");
+		retryElement.style.display = "block";
 		
-		var parent = document.getElementById("portraitM");
+		switch(calculateResult())
+		{
+			case "Docile":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Docile type!</p><p>You're quite sensitive to others!</p><p>You listen attentively and respectfully, and you're quick to pick up on things.</p><p>Because you're so good at listening, do you find that your friends tell you their problems and concerns often?</p><p>Perhaps people laugh at you sometimes for being so earnest and not recognizing jokes for what they are.</p><p>But you're always honestly surprised and bashful about this aspect of yourself...</p><p>And then honestly laugh about it!</p><p>So, a Docile, sensitive type like you must be...</p><p>";
+				break;
+			}
+			case "Hardy":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Hardy type!</p><p>And you're so determined!</p><p>You don't whine or feel sorry for yourself, and you never need help with anything. You also have a strong sense of responsibility.</p><p>You work toward your goals steadily and never require attention along the way.</p><p>Your resilient spirit is the only thing you need to guide you toward your goals.</p><p>But be careful! You risk wearing yourself out if you work too long all on your own!</p><p>You should recognize that sometimes you need help from friends.</p><p>So, a Hardy, determined type like you must be...</p><p>";
+				break;
+			}
+			case "Jolly":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Jolly type!</p><p>You have a good sense of humor, and you're compassionate. You're always making others around you laugh.</p><p>You have a sunny, positive outlook, and you have a vitality that raises the lowest of spirits to giddy heights!</p><p>Yet, for all your great cheer, you're also open to tears...</p><p>But you bounce between laughter and tears so easily!</p><p>What an adventure life must be like for you, bouncing around like that all day!</p><p>So, a Jolly type like you must be...</p><p>";
+				break;
+			}
+			case "Impish":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Impish type!</p><p>You really like to play a lot! And you enjoy eating a lot!</p><p>You love competition, but you hate losing.</p><p>Your personality seems crystal clear to others. With you, what you see is what you get! You cheer others with your dazzling smile.</p><p>But you may be afraid of showing what's in your heart and revealing your true self.</p><p>You may not want to keep your worries to yourself. You're only human, so ask your friends for advice when you need it.</p><p>So, an Impish type like you must be...<p>";
+				break;
+			}
+			case "Quirky":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Quirky type!</p><p>You want to be on the cutting edge of fashion! You want to own all the latest stuff, right?</p><p>But you grow bored of your old things and only like new things!</p><p>You're true to your emotions, and you follow your desires.</p><p>People have a hard time keeping up with you because you change so quickly.</p><p>You may want to reflect upon how your words and actions affect others.</p><p>So, a Quirky type like you must be...<p>";
+				break;
+			}
+			case "Relaxed":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Relaxed type!</p><p>You're so casual, leisurely, and carefree.</p><p>You don't rush or stress yourself out, and you don't worry about anything.</p><p>You like to take a seat and kick up your feet!</p><p>Oh, yes! You definitely have an easygoing personality, and you don't sweat the details.</p><p>People naturally flock to you because they find you to be a free spirit, which is so refreshing!</p><p>So, a Relaxed type like you must be...<p>";
+				break;
+			}
+			case "Brave":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Brave type!</p><p>You don't know the meaning of fear! You're not afraid to keep moving forward in the face of danger.</p><p>You also have a strong sense of justice and can't turn a blind eye to someone in trouble.</p><p>But you sometimes push your own personal sense of justice a little too hard. Be careful that you don't get too pushy!</p><p>So, a Brave type like you must be...<p>";
+				break;
+			}
+			case "Lonely":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Lonely type, at least a little bit!</p><p>You might find that surprising, but do you think it might be a little true?</p><p>You know what they say, though... We're all a bit lonely every now and then!</p><p>You probably keep this fact of life to yourself, though.</p><p>But if there's one thing that brings us all together... it's our need to go it solo!</p><p>So, a Lonely and solitary type like you must be...<p>";
+				break;
+			}
+			case "Timid":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Timid type. You're quite gentle!</p><p>You're sometimes a little shy about new things, aren't you?</p><p>Do you miss out on some experiences because you get worried about the newness of the challenge?</p><p>Of course, there's also a great benefit in being cautious, isn't there?</p><p>After all, it keeps you nice and safe!</p><p>You live life at your own speed, with no hurries and no worries!</p><p>So, a Timid and gentle type like you must be...<p>";
+				break;
+			}
+			case "Naive":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Naive type! You're so open and innocent!</p><p>What a strong sense of curiosity you have! And you state your opinions purely, sharing exactly what you think.</p><p>You also have an artistic spirit that isn't restrained by social conventions! You startle people with your spontaneity and vision.</p><p>But when you overdo it, other people can have a hard time keeping up with you...</p><p>Have you noticed people looking at you oddly? As if for no apparent reason?</p><p>So, a Naive, innocent type like you must be...<p>";
+				break;
+			}
+			case "Sassy":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Sassy type! Or at least somewhat sassy!</p><p>You don't like taking orders. You're a little rebellious and like to disagree.</p><p>You're a lone wolf! You like to keep your distance from groups and go off to do things on your own.</p><p>Older folks may be the ones who find you the most disagreeable, even selfish.</p><p>But people younger than you tend to really admire you!</p><p>So, a Sassy type like you must be...<p>";
+				break;
+			}
+			case "Hasty":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Hasty type!</p><p>You talk quickly! You eat quickly! You walk quickly!</p><p>People often see you as a hard worker because you're always moving around so fast!</p><p>But be careful! If you always rush so fast, you may make mistakes more often than others do. And what a waste that would be!</p><p>Relax every now and then with a nice, deep breath!</p><p>So, a Hasty type like you must be...<p>";
+				break;
+			}
+			case "Calm":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Calm type!</p><p>You're very compassionate and considerate, and you put friends ahead of yourself.</p><p>You're so generous and kindhearted that you can laugh, forgive and forget when your friends make mistakes.</p><p>But be aware that your compassion can sometimes get the best of you, putting you too far behind everyone else!</p><p>So, a Calm type like you must be...<p>";
+				break;
+			}
+			default:
+			{
+				endspeech = "<p>You seem to be...</p><p>The... uh, strange...</p><p>You must be a very... something person.</p><p>However, you are reading this, thus it means that something went wrong on my end.</p><p>But, be aware, you did nothing wrong!</p><p>So, uh... i suggest you try it again, sorry for the inconvinience, and if the problem persists, let me know on github.";
+				break;
+			}
+		}
 		
-		if (calculateResult() === "Docile")
+		resultElement.innerHTML = endspeech;
+		
+		parent = document.getElementById("portraitM");
+		
+		switch(calculateResult())
 		{
-			parent.appendChild(Bulbasaur);
-		}
-		else if (calculateResult() === "Hardy")
-		{
-			parent.appendChild(Charmander);
-		}
-		else if (calculateResult() === "Jolly")
-		{
-			parent.appendChild(Squirtle);
-		}
-		else if (calculateResult() === "Impish")
-		{
-			parent.appendChild(Pikachu);
-		}
-		else if (calculateResult() === "Quirky")
-		{
-			parent.appendChild(Meowth);
-		}
-		else if (calculateResult() === "Relaxed")
-		{
-			parent.appendChild(Psyduck);
-		}
-		else if (calculateResult() === "Brave")
-		{
-			parent.appendChild(Machop);
-		}
-		else if (calculateResult() === "Lonely")
-		{
-			parent.appendChild(Cubone);
-		}
-		else if (calculateResult() === "Timid")
-		{
-			parent.appendChild(Cyndaquil);
-		}
-		else if (calculateResult() === "Naive")
-		{
-			parent.appendChild(Totodile);
-		}
-		else if (calculateResult() === "Sassy")
-		{
-			parent.appendChild(Treecko);
-		}
-		else if (calculateResult() === "Hasty")
-		{
-			parent.appendChild(Torchic);
-		}
-		else if (calculateResult() === "Calm")
-		{
-			parent.appendChild(Mudkip);
+			case "Docile":
+			{
+				parent.appendChild(Bulbasaur);
+				break;
+			}
+			case "Hardy":
+			{
+				parent.appendChild(Charmander);
+				break;
+			}
+			case "Jolly":
+			{
+				parent.appendChild(Squirtle);
+				break;
+			}
+			case "Impish":
+			{
+				parent.appendChild(Pikachu);
+				break;
+			}
+			case "Quirky":
+			{
+				parent.appendChild(Meowth);
+				break;
+			}
+			case "Relaxed":
+			{
+				parent.appendChild(Psyduck);
+				break;
+			}
+			case "Brave":
+			{
+				parent.appendChild(Machop);
+				break;
+			}
+			case "Lonely":
+			{
+				parent.appendChild(Cubone);
+				break;
+			}
+			case "Timid":
+			{
+				parent.appendChild(Cyndaquil);
+				break;
+			}
+			case "Naive":
+			{
+				parent.appendChild(Totodile);
+				break;
+			}
+			case "Sassy":
+			{
+				parent.appendChild(Treecko);
+				break;
+			}
+			case "Hasty":
+			{
+				parent.appendChild(Torchic);
+				break;
+			}
+			case "Calm":
+			{
+				parent.appendChild(Mudkip);
+				break;
+			}
+			default:
+			{
+				parent.appendChild(MissingImage);
+				break;
+			}
 		}
 		
 		parent = document.getElementById("portraitF");
 		
-		if (calculateResult() === "Calm")
+		switch(calculateResult())
 		{
-			parent.appendChild(Bulbasaur);
+			case "Calm":
+			{
+				parent.appendChild(Bulbasaur);
+				break;
+			}
+			case "Brave":
+			{
+				parent.appendChild(Charmander);
+				break;
+			}
+			case "Relaxed":
+			{
+				parent.appendChild(Squirtle);
+				break;
+			}
+			case "Hardy":
+			{
+				parent.appendChild(Pikachu);
+				break;
+			}
+			case "Lonely":
+			{
+				parent.appendChild(Psyduck);
+				break;
+			}
+			case "Impish":
+			{
+				parent.appendChild(Cubone);
+				break;
+			}
+			case "Naive":
+			{
+				parent.appendChild(Eevee);
+				break;
+			}
+			case "Docile":
+			{
+				parent.appendChild(Chikorita);
+				break;
+			}
+			case "Jolly":
+			{
+				parent.appendChild(Totodile);
+				break;
+			}
+			case "Quirky":
+			{
+				parent.appendChild(Treecko);
+				break;
+			}
+			case "Sassy":
+			{
+				parent.appendChild(Torchic);
+				break;	
+			}
+			case "Timid":
+			{
+				parent.appendChild(Mudkip);
+				break;
+			}
+			case "Hasty":
+			{
+				parent.appendChild(Skitty);
+				break;
+			}
+			default:
+			{
+				parent.appendChild(MissingImage);
+				break;
+			}
 		}
-		else if (calculateResult() === "Brave")
-		{
-			parent.appendChild(Charmander);
-		}
-		else if (calculateResult() === "Relaxed")
-		{
-			parent.appendChild(Squirtle);
-		}
-		else if (calculateResult() === "Hardy")
-		{
-			parent.appendChild(Pikachu);
-		}
-		else if (calculateResult() === "Lonely")
-		{
-			parent.appendChild(Psyduck);
-		}
-		else if (calculateResult() === "Impish")
-		{
-			parent.appendChild(Cubone);
-		}
-		else if (calculateResult() === "Naive")
-		{
-			parent.appendChild(Eevee);
-		}
-		else if (calculateResult() === "Docile")
-		{
-			parent.appendChild(Chikorita);
-		}
-		else if (calculateResult() === "Jolly")
-		{
-			parent.appendChild(Totodile);
-		}
-		else if (calculateResult() === "Quirky")
-		{
-			parent.appendChild(Treecko);
-		}
-		else if (calculateResult() === "Sassy")
-		{
-			parent.appendChild(Torchic);
-		}
-		else if (calculateResult() === "Timid")
-		{
-			parent.appendChild(Mudkip);
-		}
-		else if (calculateResult() === "Hasty")
-		{
-			parent.appendChild(Skitty);
-		}
+
 		
 		return;
 	}
 	
-	var textMElement = document.getElementById("textM");
+	textMElement = document.getElementById("textM");
 	textMElement.style.display = "none";
 	
-	var textFElement = document.getElementById("textF");
+	textFElement = document.getElementById("textF");
 	textFElement.style.display = "none";
 	
-	var portraitMElement = document.getElementById("portraitM");
+	portraitMElement = document.getElementById("portraitM");
 	portraitMElement.style.display = "none";
 	
-	var portraitFElement = document.getElementById("portraitF");
+	portraitFElement = document.getElementById("portraitF");
 	portraitFElement.style.display = "none";
 	
-	var resultElement = document.getElementById("result");
+	resultElement = document.getElementById("result");
 	resultElement.style.display = "none";
+	
+	retryElement = document.getElementById("retry");
+	retryElement.style.display = "none";
 	
 	questionIndex = Math.floor(Math.random() * questionsRB.length);
 	
-	var question = questionsRB[questionIndex];
+	question = questionsRB[questionIndex];
 
-	var questionElement = document.getElementById("question");
+	questionElement = document.getElementById("question");
 	questionElement.innerHTML = question.question;
 
-	var answersElement = document.getElementById("answers");
+	answersElement = document.getElementById("answers");
 	answersElement.innerHTML = "";
 	
 	for (var n = 0; n < question.answers.length; n++)
@@ -1656,201 +1793,343 @@ function generateQuestionRB()
 
 				generateQuestionRB();
 			};
-		})
-		(answer.points);
+		})(answer.points);
 
 		answersElement.appendChild(button);
 		
 	}
-};
+}
 
 function generateQuestionTD()
 {
 	if (questionsTD.length === questionsTDminus8)
 	{
-		var questionElement = document.getElementById("question");
+		questionElement = document.getElementById("question");
 		questionElement.style.display = "none";
 
-		var answersElement = document.getElementById("answers");
+		answersElement = document.getElementById("answers");
 		answersElement.style.display = "none";
 
-		var resultElement = document.getElementById("result");
+		resultElement = document.getElementById("result");
 		resultElement.style.display = "block";
 		
-		var textMElement = document.getElementById("textM");
+		textMElement = document.getElementById("textM");
 		textMElement.style.display = "block";
 	
-		var textFElement = document.getElementById("textF");
+		textFElement = document.getElementById("textF");
 		textFElement.style.display = "block";
 		
-		var portraitMElement = document.getElementById("portraitM");
+		portraitMElement = document.getElementById("portraitM");
 		portraitMElement.style.display = "block";
 	
-		var portraitFElement = document.getElementById("portraitF");
+		portraitFElement = document.getElementById("portraitF");
 		portraitFElement.style.display = "block";
 		
-		resultElement.innerHTML = "You are a " + calculateResult() + " Pokemon";
+		retryElement = document.getElementById("retry");
+		retryElement.style.display = "block";
 		
-		var parent = document.getElementById("portraitM");
+		switch(calculateResult())
+		{
+			case "Lonely":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Lonely type, at least a little bit!</p><p>You might find that surprising, but do you think it might be a little true?</p><p>You know what they say, though... We're all a bit lonely every now and then!</p><p>You probably keep this fact of life to yourself, though.</p><p>But if there's one thing that brings us all together... it's our need to go it solo!</p><p>So, a Lonely and solitary type like you must be...<p>";
+				break;
+			}
+			case "Docile":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Docile type!</p><p>You're quite sensitive to others!</p><p>You listen attentively and respectfully, and you're quick to pick up on things.</p><p>Because you're so good at listening, do you find that your friends tell you their problems and concerns often?</p><p>Perhaps people laugh at you sometimes for being so earnest and not recognizing jokes for what they are.</p><p>But you're always honestly surprised and bashful about this aspect of yourself...</p><p>And then honestly laugh about it!</p><p>So, a Docile, sensitive type like you must be...<p>";
+				break;
+			}
+			case "Quirky":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Quirky type!</p><p>You want to be on the cutting edge of fashion! You want to own all the latest stuff, right?</p><p>But you grow bored of your old things and only like new things!</p><p>You're true to your emotions, and you follow your desires.</p><p>People have a hard time keeping up with you because you change so quickly.</p><p>You may want to reflect upon how your words and actions affect others.</p><p>So, a Quirky type like you must be...<p>";
+				break;
+			}
+			case "Brave":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Brave type!</p><p>You don't know the meaning of fear! You're not afraid to keep moving forward in the face of danger.</p><p>You also have a strong sense of justice and can't turn a blind eye to someone in trouble.</p><p>But you sometimes push your own personal sense of justice a little too hard. Be careful that you don't get too pushy!</p><p>So, a Brave type like you must be...<p>";
+				break;
+			}
+			case "Sassy":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Sassy type! Or at least somewhat sassy!</p><p>You don't like taking orders. You're a little rebellious and like to disagree.</p><p>You're a lone wolf! You like to keep your distance from groups and go off to do things on your own.</p><p>Older folks may be the ones who find you the most disagreeable, even selfish.</p><p>But people younger than you tend to really admire you!</p><p>So, a Sassy type like you must be...<p>";
+				break;
+			}
+			case "Calm":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Calm type!</p><p>You're very compassionate and considerate, and you put friends ahead of yourself.</p><p>You're so generous and kindhearted that you can laugh, forgive and forget when your friends make mistakes.</p><p>But be aware that your compassion can sometimes get the best of you, putting you too far behind everyone else!</p><p>So, a Calm type like you must be...<p>";
+				break;
+			}
+			case "Timid":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Timid type. You're quite gentle!</p><p>You're sometimes a little shy about new things, aren't you?</p><p>Do you miss out on some experiences because you get worried about the newness of the challenge?</p><p>Of course, there's also a great benefit in being cautious, isn't there?</p><p>After all, it keeps you nice and safe!</p><p>You live life at your own speed, with no hurries and no worries!</p><p>So, a Timid and gentle type like you must be...<p>";
+				break;
+			}
+			case "Jolly":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Jolly type!</p><p>You have a good sense of humor, and you're compassionate. You're always making others around you laugh.</p><p>You have a sunny, positive outlook, and you have a vitality that raises the lowest of spirits to giddy heights!</p><p>Yet, for all your great cheer, you're also open to tears...</p><p>But you bounce between laughter and tears so easily!</p><p>What an adventure life must be like for you, bouncing around like that all day!</p><p>So, a Jolly type like you must be...<p>";
+				break;
+			}
+			case "Quiet":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Quiet type! And very calm!</p><p>You're great with numbers, and you analyze information before making decisions.</p><p>You rarely make mistakes, because you make decisions so calmly and rationally.</p><p>You also may find it hard to guess what others are thinking, and they may find you a touch cold at times.</p><p>You may not want to keep your feelings to yourself so much of the time.</p><p>So, a Quiet and calm type like you must be...<p>";
+				break;
+			}
+			case "Hardy":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Hardy type! And you're so determined!</p><p>You don't whine or feel sorry for yourself, and you never need help with anything. You also have a strong sense of responsibility.</p><p>You work toward your goals steadily and never require attention along the way.</p><p>Your resilient spirit is the only thing you need to guide you toward your goals.</p><p>But be careful! You risk wearing yourself out if you work too long all on your own!</p><p>You should recognize that sometimes you need help from friends.</p><p>So, a Hardy, determined type like you must be...<p>";
+				break;
+			}
+			case "Rash":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Rash type, just a little bit hasty at times!</p><p>You may run out of your house and forget to lock the door once in a while.</p><p>And you may leave things like umbrellas behind when you leave places.</p><p>Maybe you even dash outside in your slippers every now and then!</p><p>Perhaps you even wear your shirts inside out all the time!</p><p>Oh, is that even rasher than you really are? So sorry!</p><p>But know that your friends think your funny little flubs are adorable!</p><p>So, a rash and hasty type like you...</p><p>Oh, wait! One more thing!</p><p>You also sometimes reveal your friends' secrets by accident, don't you!</p><p>Sorry. It had to be said!</p><p>So, without further ado... a Rash type like you must be...<p>";
+				break;
+			}
+			case "Hasty":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Hasty type!</p><p>You talk quickly! You eat quickly! You walk quickly!</p><p>People often see you as a hard worker because you're always moving around so fast!</p><p>But be careful! If you always rush so fast, you may make mistakes more often than others do. And what a waste that would be!</p><p>Relax every now and then with a nice, deep breath!</p><p>So, a Hasty type like you must be...<p>";
+				break;
+			}
+			case "Bold":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Bold type!</p><p>You're so brave, and you never back down from anything! And you're also gutsy and brash in a way that others aren't!</p><p>You're not shy about asking to take home all the leftovers at restaurants, right?</p><p>If someone's treating you to dinner, you have no problem with ordering lots of good stuff!</p><p>And you aren't fazed by doing things that most others would think twice about doing.</p><p>Perhaps you don't even notice when others are upset with you!</p><p>You know, you have the potential to become a truly great person... because you'll be the last one standing!</p><p>So, a Bold type like you must be...<p>";
+				break;
+			}
+			case "Naive":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Naive type! You're so open and innocent!</p><p>What a strong sense of curiosity you have! And you state your opinions purely, sharing exactly what you think.</p><p>You also have an artistic spirit that isn't restrained by social conventions! You startle people with your spontaneity and vision.</p><p>But when you overdo it, other people can have a hard time keeping up with you...</p><p>Have you noticed people looking at you oddly? As if for no apparent reason?</p><p>So, a Naive, innocent type like you must be...<p>";
+				break;
+			}
+			case "Impish":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Impish type!</p><p>You really like to play a lot! And you enjoy eating a lot!</p><p>You love competition, but you hate losing.</p><p>Your personality seems crystal clear to others. With you, what you see is what you get! You cheer others with your dazzling smile.</p><p>But you may be afraid of showing what's in your heart and revealing your true self.</p><p>You may not want to keep your worries to yourself. You're only human, so ask your friends for advice when you need it.</p><p>So, an Impish type like you must be...<p>";
+				break;
+			}
+			case "Relaxed":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Relaxed type!</p><p>You're so casual, leisurely, and carefree.</p><p>You don't rush or stress yourself out, and you don't worry about anything.</p><p>You like to take a seat and kick up your feet!</p><p>Oh, yes! You definitely have an easygoing personality, and you don't sweat the details.</p><p>People naturally flock to you because they find you to be a free spirit, which is so refreshing!</p><p>So, a Relaxed type like you...";
+				break;
+			}
+			default:
+			{
+				endspeech = "<p>You seem to be...</p><p>The... uh, strange...</p><p>You must be a very... something person.</p><p>However, you are reading this, thus it means that something went wrong on my end.</p><p>But, be aware, you did nothing wrong!</p><p>So, uh... i suggest you try it again, sorry for the inconvinience, and if the problem persists, let me know on github.";
+				break;
+			}
+		}
 		
-		if (calculateResult() === "Lonely")
+		resultElement.innerHTML = endspeech;
+		
+		parent = document.getElementById("portraitM");
+		
+		switch(calculateResult())
 		{
-			parent.appendChild(Bulbasaur);
-		}
-		else if (calculateResult() === "Docile")
-		{
-			parent.appendChild(Charmander);
-		}
-		else if (calculateResult() === "Quirky")
-		{
-			parent.appendChild(Squirtle);
-		}
-		else if (calculateResult() === "Brave")
-		{
-			parent.appendChild(Pikachu);
-		}
-		else if (calculateResult() === "Sassy")
-		{
-			parent.appendChild(Meowth);
-		}
-		else if (calculateResult() === "Calm")
-		{
-			parent.appendChild(Chikorita);
-		}
-		else if (calculateResult() === "Timid")
-		{
-			parent.appendChild(Cyndaquil);
-		}
-		else if (calculateResult() === "Jolly")
-		{
-			parent.appendChild(Totodile);
-		}
-		else if (calculateResult() === "Quiet")
-		{
-			parent.appendChild(Treecko);
-		}
-		else if (calculateResult() === "Hardy")
-		{
-			parent.appendChild(Torchic);
-		}
-		else if (calculateResult() === "Rash")
-		{
-			parent.appendChild(Mudkip);
-		}
-		else if (calculateResult() === "Hasty")
-		{
-			parent.appendChild(Skitty);
-		}
-		else if (calculateResult() === "Bold")
-		{
-			parent.appendChild(Turtwig);
-		}
-		else if (calculateResult() === "Naive")
-		{
-			parent.appendChild(Chimchar);
-		}
-		else if (calculateResult() === "Impish")
-		{
-			parent.appendChild(Piplup);
-		}
-		else if (calculateResult() === "Relaxed")
-		{
-			parent.appendChild(Munchlax);
+			case "Lonely":
+			{
+				parent.appendChild(Bulbasaur);
+				break;
+			}
+			case "Docile":
+			{
+				parent.appendChild(Charmander);
+				break;
+			}
+			case "Quirky":
+			{
+				parent.appendChild(Squirtle);
+				break;
+			}
+			case "Brave":
+			{
+				parent.appendChild(Pikachu);
+				break;
+			}
+			case "Sassy":
+			{
+				parent.appendChild(Meowth);
+				break;
+			}
+			case "Calm":
+			{
+				parent.appendChild(Chikorita);
+				break;
+			}
+			case "Timid":
+			{
+				parent.appendChild(Cyndaquil);
+				break;
+			}
+			case "Jolly":
+			{
+				parent.appendChild(Totodile);
+				break;
+			}
+			case "Quiet":
+			{
+				parent.appendChild(Treecko);
+				break;
+			}
+			case "Hardy":
+			{
+				parent.appendChild(Torchic);
+				break;
+			}
+			case "Rash":
+			{
+				parent.appendChild(Mudkip);
+				break;
+			}
+			case "Hasty":
+			{
+				parent.appendChild(Skitty);
+				break;
+			}
+			case "Bold":
+			{
+				parent.appendChild(Turtwig);
+				break;
+			}
+			case "Naive":
+			{
+				parent.appendChild(Chimchar);
+				break;
+			}
+			case "Impish":
+			{
+				parent.appendChild(Piplup);
+				break;
+			}
+			case "Relaxed":
+			{
+				parent.appendChild(Munchlax);
+				break;
+			}
+			default:
+			{
+				parent.appendChild(MissingImage);
+				break;
+			}
 		}
 		
 		parent = document.getElementById("portraitF");
 		
-		if (calculateResult() === "Docile")
+		switch(calculateResult())
 		{
-			parent.appendChild(Bulbasaur);
-		}
-		else if (calculateResult() === "Brave")
-		{
-			parent.appendChild(Charmander);
-		}
-		else if (calculateResult() === "Bold")
-		{
-			parent.appendChild(Squirtle);
-		}
-		else if (calculateResult() === "Hasty")
-		{
-			parent.appendChild(Pikachu);
-		}
-		else if (calculateResult() === "Relaxed")
-		{
-			parent.appendChild(Meowth);
-		}
-		else if (calculateResult() === "Quiet")
-		{
-			parent.appendChild(Chikorita);
-		}
-		else if (calculateResult() === "Calm")
-		{
-			parent.appendChild(Cyndaquil);
-		}
-		else if (calculateResult() === "Sassy")
-		{
-			parent.appendChild(Totodile);
-		}
-		else if (calculateResult() === "Hardy")
-		{
-			parent.appendChild(Treecko);
-		}
-		else if (calculateResult() === "Rash")
-		{
-			parent.appendChild(Torchic);
-		}
-		else if (calculateResult() === "Lonely")
-		{
-			parent.appendChild(Mudkip);
-		}
-		else if (calculateResult() === "Naive")
-		{
-			parent.appendChild(Skitty);
-		}
-		else if (calculateResult() === "Timid")
-		{
-			parent.appendChild(Turtwig);
-		}
-		else if (calculateResult() === "Impish")
-		{
-			parent.appendChild(Chimchar);
-		}
-		else if (calculateResult() === "Quirky")
-		{
-			parent.appendChild(Piplup);
-		}
-		else if (calculateResult() === "Jolly")
-		{
-			parent.appendChild(Munchlax);
+			case "Docile":
+			{
+				parent.appendChild(Bulbasaur);
+				break;
+			}
+			case "Brave":
+			{
+				parent.appendChild(Charmander);
+				break;
+			}
+			case "Bold":
+			{
+				parent.appendChild(Squirtle);
+				break;
+			}
+			case "Hasty":
+			{
+				parent.appendChild(Pikachu);
+				break;
+			}
+			case "Relaxed":
+			{
+				parent.appendChild(Meowth);
+				break;
+			}
+			case "Quiet":
+			{
+				parent.appendChild(Chikorita);
+				break;
+			}
+			case "Calm":
+			{
+				parent.appendChild(Cyndaquil);
+				break;
+			}
+			case "Sassy":
+			{
+				parent.appendChild(Totodile);
+				break;
+			}
+			case "Hardy":
+			{
+				parent.appendChild(Treecko);
+				break;
+			}
+			case "Rash":
+			{
+				parent.appendChild(Torchic);
+				break;
+			}
+			case "Lonely":
+			{
+				parent.appendChild(Mudkip);
+				break;
+			}
+			case "Naive":
+			{
+				parent.appendChild(Skitty);
+				break;
+			}
+			case "Timid":
+			{
+				parent.appendChild(Turtwig);
+				break;
+			}
+			case "Impish":
+			{
+				parent.appendChild(Chimchar);
+				break;
+			}
+			case "Quirky":
+			{
+				parent.appendChild(Piplup);
+				break;
+			}
+			case "Jolly":
+			{
+				parent.appendChild(Munchlax);
+				break;
+			}
+			default:
+			{
+				parent.appendChild(MissingImage);
+				break;
+			}
 		}
 		
 		return;
 	}
 	
-	var textMElement = document.getElementById("textM");
+	textMElement = document.getElementById("textM");
 	textMElement.style.display = "none";
 	
-	var textFElement = document.getElementById("textF");
+	textFElement = document.getElementById("textF");
 	textFElement.style.display = "none";
 	
-	var portraitMElement = document.getElementById("portraitM");
+	portraitMElement = document.getElementById("portraitM");
 	portraitMElement.style.display = "none";
 	
-	var portraitFElement = document.getElementById("portraitF");
+	portraitFElement = document.getElementById("portraitF");
 	portraitFElement.style.display = "none";
 	
-	var resultElement = document.getElementById("result");
+	resultElement = document.getElementById("result");
 	resultElement.style.display = "none";
+	
+	retryElement = document.getElementById("retry");
+	retryElement.style.display = "none";
 	
 	questionIndex = Math.floor(Math.random() * questionsTD.length);
 	
-	var question = questionsTD[questionIndex];
+	question = questionsTD[questionIndex];
 
-	var questionElement = document.getElementById("question");
+	questionElement = document.getElementById("question");
 	questionElement.innerHTML = question.question;
 
-	var answersElement = document.getElementById("answers");
+	answersElement = document.getElementById("answers");
 	answersElement.innerHTML = "";
 	
 	for (var n = 0; n < question.answers.length; n++)
@@ -1877,201 +2156,343 @@ function generateQuestionTD()
 
 				generateQuestionTD();
 			};
-		})
-		(answer.points);
+		})(answer.points);
 
 		answersElement.appendChild(button);
 		
 	}
-};
+}
 
 function generateQuestionEOS()
 {
 	if (questionsEOS.length === questionsEOSminus8)
 	{
-		var questionElement = document.getElementById("question");
+		questionElement = document.getElementById("question");
 		questionElement.style.display = "none";
 
-		var answersElement = document.getElementById("answers");
+		answersElement = document.getElementById("answers");
 		answersElement.style.display = "none";
 
-		var resultElement = document.getElementById("result");
+		resultElement = document.getElementById("result");
 		resultElement.style.display = "block";
 		
-		var textMElement = document.getElementById("textM");
+		textMElement = document.getElementById("textM");
 		textMElement.style.display = "block";
 	
-		var textFElement = document.getElementById("textF");
+		textFElement = document.getElementById("textF");
 		textFElement.style.display = "block";
 		
-		var portraitMElement = document.getElementById("portraitM");
+		portraitMElement = document.getElementById("portraitM");
 		portraitMElement.style.display = "block";
 	
-		var portraitFElement = document.getElementById("portraitF");
+		portraitFElement = document.getElementById("portraitF");
 		portraitFElement.style.display = "block";
 		
-		resultElement.innerHTML = "You are a " + calculateResult() + " Pokemon";
+		retryElement = document.getElementById("retry");
+		retryElement.style.display = "block";
 		
-		var parent = document.getElementById("portraitM");
+		switch(calculateResult())
+		{
+			case "Lonely":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Lonely type, at least a little bit!</p><p>You might find that surprising, but do you think it might be a little true?</p><p>You know what they say, though... We're all a bit lonely every now and then!</p><p>You probably keep this fact of life to yourself, though.</p><p>But if there's one thing that brings us all together... it's our need to go it solo!</p><p>So, a Lonely and solitary type like you must be...<p>";
+				break;
+			}
+			case "Docile":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Docile type!</p><p>You're quite sensitive to others!</p><p>You listen attentively and respectfully, and you're quick to pick up on things.</p><p>Because you're so good at listening, do you find that your friends tell you their problems and concerns often?</p><p>Perhaps people laugh at you sometimes for being so earnest and not recognizing jokes for what they are.</p><p>But you're always honestly surprised and bashful about this aspect of yourself...</p><p>And then honestly laugh about it!</p><p>So, a Docile, sensitive type like you must be...<p>";
+				break;
+			}
+			case "Quirky":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Quirky type!</p><p>You want to be on the cutting edge of fashion! You want to own all the latest stuff, right?</p><p>But you grow bored of your old things and only like new things!</p><p>You're true to your emotions, and you follow your desires.</p><p>People have a hard time keeping up with you because you change so quickly.</p><p>You may want to reflect upon how your words and actions affect others.</p><p>So, a Quirky type like you must be...<p>";
+				break;
+			}
+			case "Brave":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Brave type!</p><p>You don't know the meaning of fear! You're not afraid to keep moving forward in the face of danger.</p><p>You also have a strong sense of justice and can't turn a blind eye to someone in trouble.</p><p>But you sometimes push your own personal sense of justice a little too hard. Be careful that you don't get too pushy!</p><p>So, a Brave type like you must be...<p>";
+				break;
+			}
+			case "Calm":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Calm type!</p><p>You're very compassionate and considerate, and you put friends ahead of yourself.</p><p>You're so generous and kindhearted that you can laugh, forgive and forget when your friends make mistakes.</p><p>But be aware that your compassion can sometimes get the best of you, putting you too far behind everyone else!</p><p>So, a Calm type like you must be...<p>";
+				break;
+			}
+			case "Timid":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Timid type. You're quite gentle!</p><p>You're sometimes a little shy about new things, aren't you?</p><p>Do you miss out on some experiences because you get worried about the newness of the challenge?</p><p>Of course, there's also a great benefit in being cautious, isn't there?</p><p>After all, it keeps you nice and safe!</p><p>You live life at your own speed, with no hurries and no worries!</p><p>So, a Timid and gentle type like you must be...<p>";
+				break;
+			}
+			case "Jolly":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Jolly type!</p><p>You have a good sense of humor, and you're compassionate. You're always making others around you laugh.</p><p>You have a sunny, positive outlook, and you have a vitality that raises the lowest of spirits to giddy heights!</p><p>Yet, for all your great cheer, you're also open to tears...</p><p>But you bounce between laughter and tears so easily!</p><p>What an adventure life must be like for you, bouncing around like that all day!</p><p>So, a Jolly type like you must be...<p>";
+				break;
+			}
+			case "Relaxed":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Relaxed type!</p><p>You're so casual, leisurely, and carefree.</p><p>You don't rush or stress yourself out, and you don't worry about anything.</p><p>You like to take a seat and kick up your feet!</p><p>Oh, yes! You definitely have an easygoing personality, and you don't sweat the details.</p><p>People naturally flock to you because they find you to be a free spirit, which is so refreshing!</p><p>So, a Relaxed type like you must be...<p>";
+				break;
+			}
+			case "Quiet":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Quiet type! And very calm!</p><p>You're great with numbers, and you analyze information before making decisions.</p><p>You rarely make mistakes, because you make decisions so calmly and rationally.</p><p>You also may find it hard to guess what others are thinking, and they may find you a touch cold at times.</p><p>You may not want to keep your feelings to yourself so much of the time.</p><p>So, a Quiet and calm type like you must be...<p>";
+				break;
+			}
+			case "Hardy":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Hardy type! And you're so determined!</p><p>You don't whine or feel sorry for yourself, and you never need help with anything. You also have a strong sense of responsibility.</p><p>You work toward your goals steadily and never require attention along the way.</p><p>Your resilient spirit is the only thing you need to guide you toward your goals.</p><p>But be careful! You risk wearing yourself out if you work too long all on your own!</p><p>You should recognize that sometimes you need help from friends.</p><p>So, a Hardy, determined type like you must be...<p>";
+				break;
+			}
+			case "Rash":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Rash type, just a little bit hasty at times!</p><p>You may run out of your house and forget to lock the door once in a while.</p><p>And you may leave things like umbrellas behind when you leave places.</p><p>Maybe you even dash outside in your slippers every now and then!</p><p>Perhaps you even wear your shirts inside out all the time!</p><p>Oh, is that even rasher than you really are? So sorry!</p><p>But know that your friends think your funny little flubs are adorable!</p><p>So, a rash and hasty type like you...</p><p>Oh, wait! One more thing!</p><p>You also sometimes reveal your friends' secrets by accident, don't you!</p><p>Sorry. It had to be said!</p><p>So, without further ado... a Rash type like you must be...<p>";
+				break;
+			}
+			case "Bold":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Bold type!</p><p>You're so brave, and you never back down from anything! And you're also gutsy and brash in a way that others aren't!</p><p>You're not shy about asking to take home all the leftovers at restaurants, right?</p><p>If someone's treating you to dinner, you have no problem with ordering lots of good stuff!</p><p>And you aren't fazed by doing things that most others would think twice about doing.</p><p>Perhaps you don't even notice when others are upset with you!</p><p>You know, you have the potential to become a truly great person... because you'll be the last one standing!</p><p>So, a Bold type like you must be...<p>";
+				break;
+			}
+			case "Naive":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Naive type! You're so open and innocent!</p><p>What a strong sense of curiosity you have! And you state your opinions purely, sharing exactly what you think.</p><p>You also have an artistic spirit that isn't restrained by social conventions! You startle people with your spontaneity and vision.</p><p>But when you overdo it, other people can have a hard time keeping up with you...</p><p>Have you noticed people looking at you oddly? As if for no apparent reason?</p><p>So, a Naive, innocent type like you must be...<p>";
+				break;
+			}
+			case "Impish":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Impish type!</p><p>You really like to play a lot! And you enjoy eating a lot!</p><p>You love competition, but you hate losing.</p><p>Your personality seems crystal clear to others. With you, what you see is what you get! You cheer others with your dazzling smile.</p><p>But you may be afraid of showing what's in your heart and revealing your true self.</p><p>You may not want to keep your worries to yourself. You're only human, so ask your friends for advice when you need it.</p><p>So, an Impish type like you must be...<p>";
+				break;
+			}
+			case "Hasty":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Hasty type!</p><p>You talk quickly! You eat quickly! You walk quickly!</p><p>People often see you as a hard worker because you're always moving around so fast!</p><p>But be careful! If you always rush so fast, you may make mistakes more often than others do. And what a waste that would be!</p><p>Relax every now and then with a nice, deep breath!</p><p>So, a Hasty type like you...";
+				break;
+			}
+			case "Sassy":
+			{
+				endspeech = "<p>You seem to be...</p><p>The Sassy type! Or at least somewhat sassy!</p><p>You don't like taking orders. You're a little rebellious and like to disagree.</p><p>You're a lone wolf! You like to keep your distance from groups and go off to do things on your own.</p><p>Older folks may be the ones who find you the most disagreeable, even selfish.</p><p>But people younger than you tend to really admire you!</p><p>So, a Sassy type like you must be...<p>";
+				break;
+			}
+			default:
+			{
+				endspeech = "<p>You seem to be...</p><p>The... uh, strange...</p><p>You must be a very... something person.</p><p>However, you are reading this, thus it means that something went wrong on my end.</p><p>But, be aware, you did nothing wrong!</p><p>So, uh... i suggest you try it again, sorry for the inconvinience, and if the problem persists, let me know on github.";
+				break;
+			}
+		}
 		
-		if (calculateResult() === "Lonely")
-		{
-			parent.appendChild(Bulbasaur);
-		}
-		else if (calculateResult() === "Docile")
-		{
-			parent.appendChild(Charmander);
-		}
-		else if (calculateResult() === "Quirky")
-		{
-			parent.appendChild(Squirtle);
-		}
-		else if (calculateResult() === "Brave")
-		{
-			parent.appendChild(Pikachu);
-		}
-		else if (calculateResult() === "Calm")
-		{
-			parent.appendChild(Chikorita);
-		}
-		else if (calculateResult() === "Timid")
-		{
-			parent.appendChild(Cyndaquil);
-		}
-		else if (calculateResult() === "Jolly")
-		{
-			parent.appendChild(Totodile);
-		}
-		else if (calculateResult() === "Relaxed")
-		{
-			parent.appendChild(Phanpy);
-		}
-		else if (calculateResult() === "Quiet")
-		{
-			parent.appendChild(Treecko);
-		}
-		else if (calculateResult() === "Hardy")
-		{
-			parent.appendChild(Torchic);
-		}
-		else if (calculateResult() === "Rash")
-		{
-			parent.appendChild(Mudkip);
-		}
-		else if (calculateResult() === "Bold")
-		{
-			parent.appendChild(Turtwig);
-		}
-		else if (calculateResult() === "Naive")
-		{
-			parent.appendChild(Chimchar);
-		}
-		else if (calculateResult() === "Impish")
-		{
-			parent.appendChild(Piplup);
-		}
-		else if (calculateResult() === "Hasty")
-		{
-			parent.appendChild(Shinx);
-		}
-		else if (calculateResult() === "Sassy")
-		{
-			parent.appendChild(Riolu);
-		}
+		resultElement.innerHTML = endspeech;
+	
+		parent = document.getElementById("portraitM");
 		
+		switch(calculateResult())
+		{
+			case "Lonely":
+			{
+				parent.appendChild(Bulbasaur);
+				break;
+			}
+			case "Docile":
+			{
+				parent.appendChild(Charmander);
+				break;
+			}
+			case "Quirky":
+			{
+				parent.appendChild(Squirtle);
+				break;
+			}
+			case "Brave":
+			{
+				parent.appendChild(Pikachu);
+				break;
+			}
+			case "Calm":
+			{
+				parent.appendChild(Chikorita);
+				break;
+			}
+			case "Timid":
+			{
+				parent.appendChild(Cyndaquil);
+				break;
+			}
+			case "Jolly":
+			{
+				parent.appendChild(Totodile);
+				break;
+			}
+			case "Relaxed":
+			{
+				parent.appendChild(Phanpy);
+				break;
+			}
+			case "Quiet":
+			{
+				parent.appendChild(Treecko);
+				break;
+			}
+			case "Hardy":
+			{
+				parent.appendChild(Torchic);
+				break;
+			}
+			case "Rash":
+			{
+				parent.appendChild(Mudkip);
+				break;
+			}
+			case "Bold":
+			{
+				parent.appendChild(Turtwig);
+				break;
+			}
+			case "Naive":
+			{
+				parent.appendChild(Chimchar);
+				break;
+			}
+			case "Impish":
+			{
+				parent.appendChild(Piplup);
+				break;
+			}
+			case "Hasty":
+			{
+				parent.appendChild(Shinx);
+				break;
+			}
+			case "Sassy":
+			{
+				parent.appendChild(Riolu);
+				break;
+			}
+			default:
+			{
+				parent.appendChild(MissingImage);
+				break;
+			}
+		}
+
 		parent = document.getElementById("portraitF");
-		
-		if (calculateResult() === "Docile")
+
+		switch(calculateResult())
 		{
-			parent.appendChild(Bulbasaur);
-		}
-		else if (calculateResult() === "Brave")
-		{
-			parent.appendChild(Charmander);
-		}
-		else if (calculateResult() === "Bold")
-		{
-			parent.appendChild(Squirtle);
-		}
-		else if (calculateResult() === "Hasty")
-		{
-			parent.appendChild(Pikachu);
-		}
-		else if (calculateResult() === "Relaxed")
-		{
-			parent.appendChild(Vulpix);
-		}
-		else if (calculateResult() === "Jolly")
-		{
-			parent.appendChild(Eevee);
-		}
-		else if (calculateResult() === "Quiet")
-		{
-			parent.appendChild(Chikorita);
-		}
-		else if (calculateResult() === "Calm")
-		{
-			parent.appendChild(Cyndaquil);
-		}
-		else if (calculateResult() === "Sassy")
-		{
-			parent.appendChild(Totodile);
-		}
-		else if (calculateResult() === "Hardy")
-		{
-			parent.appendChild(Treecko);
-		}
-		else if (calculateResult() === "Rash")
-		{
-			parent.appendChild(Torchic);
-		}
-		else if (calculateResult() === "Lonely")
-		{
-			parent.appendChild(Mudkip);
-		}
-		else if (calculateResult() === "Naive")
-		{
-			parent.appendChild(Skitty);
-		}
-		else if (calculateResult() === "Timid")
-		{
-			parent.appendChild(Turtwig);
-		}
-		else if (calculateResult() === "Impish")
-		{
-			parent.appendChild(Chimchar);
-		}
-		else if (calculateResult() === "Quirky")
-		{
-			parent.appendChild(Piplup);
+			case "Docile":
+			{
+				parent.appendChild(Bulbasaur);
+				break;
+			}
+			case "Brave":
+			{
+				parent.appendChild(Charmander);
+				break;
+			}
+			case "Bold":
+			{
+				parent.appendChild(Squirtle);
+				break;
+			}
+			case "Hasty":
+			{
+				parent.appendChild(Pikachu);
+				break;
+			}
+			case "Relaxed":
+			{
+				parent.appendChild(Vulpix);
+				break;
+			}
+			case "Jolly":
+			{
+				parent.appendChild(Eevee);
+				break;
+			}
+			case "Quiet":
+			{
+				parent.appendChild(Chikorita);
+				break;
+			}
+			case "Calm":
+			{
+				parent.appendChild(Cyndaquil);
+				break;
+			}
+			case "Sassy":
+			{
+				parent.appendChild(Totodile);
+				break;
+			}
+			case "Hardy":
+			{
+				parent.appendChild(Treecko);
+				break;
+			}
+			case "Rash":
+			{
+				parent.appendChild(Torchic);
+				break;
+			}
+			case "Lonely":
+			{
+				parent.appendChild(Mudkip);
+				break;
+			}
+			case "Naive":
+			{
+				parent.appendChild(Skitty);
+				break;
+			}
+			case "Timid":
+			{
+				parent.appendChild(Turtwig);
+				break;
+			}
+			case "Impish":
+			{
+				parent.appendChild(Chimchar);
+				break;
+			}
+			case "Quirky":
+			{
+				parent.appendChild(Piplup);
+				break;
+			}
+			default:
+			{
+				parent.appendChild(MissingImage);
+				break;
+			}
 		}
 		
 		return;
 	}
 	
-	var textMElement = document.getElementById("textM");
+	textMElement = document.getElementById("textM");
 	textMElement.style.display = "none";
 	
-	var textFElement = document.getElementById("textF");
+	textFElement = document.getElementById("textF");
 	textFElement.style.display = "none";
 	
-	var portraitMElement = document.getElementById("portraitM");
+	portraitMElement = document.getElementById("portraitM");
 	portraitMElement.style.display = "none";
 	
-	var portraitFElement = document.getElementById("portraitF");
+	portraitFElement = document.getElementById("portraitF");
 	portraitFElement.style.display = "none";
 	
-	var resultElement = document.getElementById("result");
+	resultElement = document.getElementById("result");
 	resultElement.style.display = "none";
+	
+	retryElement = document.getElementById("retry");
+	retryElement.style.display = "none";
 	
 	questionIndex = Math.floor(Math.random() * questionsEOS.length);
 	
-	var question = questionsEOS[questionIndex];
+	question = questionsEOS[questionIndex];
 
-	var questionElement = document.getElementById("question");
+	questionElement = document.getElementById("question");
 	questionElement.innerHTML = question.question;
 
-	var answersElement = document.getElementById("answers");
+	answersElement = document.getElementById("answers");
 	answersElement.innerHTML = "";
 	
 	for (var n = 0; n < question.answers.length; n++)
@@ -2098,13 +2519,12 @@ function generateQuestionEOS()
 
 				generateQuestionEOS();
 			};
-		})
-		(answer.points);
+		})(answer.points);
 
 		answersElement.appendChild(button);
 		
 	}
-};
+}
 
 function calculateResult()
 {
@@ -2127,68 +2547,91 @@ function calculateResult()
 
 	var maxPoints = Math.max(bravePoints, hardyPoints, docilePoints, timidPoints, relaxedPoints, jollyPoints, naivePoints, sassyPoints, impishPoints, quirkyPoints, hastyPoints, calmPoints, lonelyPoints, boldPoints, rashPoints, quietPoints)
 	
-	if (maxPoints === bravePoints)
+	switch(maxPoints)
 	{
-		return "Brave";
+		case bravePoints:
+		{
+			return "Brave";
+		}
+		case hardyPoints:
+		{
+			return "Hardy";
+		}
+		case docilePoints:
+		{
+			return "Docile";
+		}
+		case timidPoints:
+		{
+			return "Timid";
+		}
+		case relaxedPoints:
+		{
+			return "Relaxed";
+		}
+		case jollyPoints:
+		{
+			return "Jolly";
+		}
+		case naivePoints:
+		{
+			return "Naive";
+		}
+		case sassyPoints:
+		{
+			return "Sassy";
+		}
+		case impishPoints:
+		{
+			return "Impish";
+		}
+		case quirkyPoints:
+		{
+			return "Quirky";
+		}
+		case hastyPoints:
+		{
+			return "Hasty";
+		}
+		case calmPoints:
+		{
+			return "Calm";
+		}
+		case lonelyPoints:
+		{
+			return "Lonely";
+		}
+		case boldPoints:
+		{
+			return "Bold";
+		}
+		case rashPoints:
+		{
+			return "Rash";
+		}
+		case quietPoints:
+		{
+			return "Quiet";
+		}
+		default:
+		{
+			return "MissingIm";
+		}
 	}
-	else if (maxPoints === hardyPoints)
+}
+
+function toggleMusic()
+{
+	var music = document.getElementById("music");
+	
+	music.volume = 0.5;
+	
+	if (music.paused)
 	{
-		return "Hardy";
+		music.play();
 	}
-	else if (maxPoints === docilePoints)
+	else
 	{
-		return "Docile";
-	}
-	else if (maxPoints === timidPoints)
-	{
-		return "Timid";
-	}
-	else if (maxPoints === relaxedPoints)
-	{
-		return "Relaxed";
-	}
-	else if (maxPoints === jollyPoints)
-	{
-		return "Jolly";
-	}
-	else if (maxPoints === naivePoints)
-	{
-		return "Naive";
-	}
-	else if (maxPoints === sassyPoints)
-	{
-		return "Sassy";
-	}
-	else if (maxPoints === impishPoints)
-	{
-		return "Impish";
-	}
-	else if (maxPoints === quirkyPoints)
-	{
-		return "Quirky";
-	}
-	else if (maxPoints === hastyPoints)
-	{
-		return "Hasty";
-	}
-	else if (maxPoints === calmPoints)
-	{
-		return "Calm";
-	}
-	else if (maxPoints === lonelyPoints)
-	{
-		return "Lonely";
-	}
-	else if (maxPoints === boldPoints)
-	{
-		return "Bold";
-	}
-	else if (maxPoints === rashPoints)
-	{
-		return "Rash";
-	}
-	else if (maxPoints === quietPoints)
-	{
-		return "Quiet";
+		music.pause();
 	}
 }

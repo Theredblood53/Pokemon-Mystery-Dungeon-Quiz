@@ -3,17 +3,39 @@
 
 A project aimed at re-creating the original quiz from the Pokemon Mystery Dungeon Saga.
 
-All of the assets have been re-created based on the original ones.
+Background video and all the Pokemon portraits have been re-created based on the original ones.
+
+Questions, Answers and results data have all been taken from the Pokemon Mystery Dungeon Fandom Wiki: https://pokemon.fandom.com/wiki/Starter_Pokémon_(Mystery_Dungeon)
 
 Current deployment page: https://theredblood53.github.io/Pokemon-Mystery-Dungeon-Quiz
 
 # Changelog
-### Version 1.0.2
+
+### Version 2.0
+Changelog:
+
+-Added Music!
+
+-Added a different textbox color for EOT/EOD quiz
+
+-Added the "End of Quiz" Speech for all tests
+
+-Added game names in the main page
+
+-Added a button to go back to the homepage after a quiz
+
+-Modified the chains of if else with switch statements in the javascript code
+
+-Modified the code in general so it looks cleaner
+
+-Modified the name of files
+
+### Version 1.2
 Changelog:
 
 -Added missing "è" and "é" letters to the font
 
-### Version 1.0.1
+### Version 1.1
 Changelog:
 
 -Fixed some errors i forgot to check
